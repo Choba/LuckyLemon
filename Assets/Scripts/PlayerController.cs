@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void updateHUD() {
-		int fruits = GameObject.FindGameObjectsWithTag("Fruit").Length - 1;
+		int fruits = GameObject.FindGameObjectsWithTag("Fruit").Length;
 		pointsText.text = "Fruits: " + fruits.ToString();
 
 		if(fruits == 0) {

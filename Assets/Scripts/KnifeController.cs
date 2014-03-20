@@ -7,16 +7,20 @@ public class KnifeController : MonoBehaviour {
 	private float timerLimit;
 	private float deltaTime;
 	private List<GameObject> collidingFruits = new List<GameObject>();
-	private bool bIsSlicing;
 	private GameObject knife;
-	private GameObject topLight;
+	private GameObject knifeShadow;
+    private float chopSpeed = 5;
+    private float liftSpeed = 20;
+    private enum State { Idle, Imminent, Chopping, OnBoard, Lifting };
+    private State state;
 
 	// Use this for initialization
 	void Start () {
 		knife = transform.Find ("Knife").gameObject;
-		topLight = transform.Find ("TopLight").gameObject;
+		knifeShadow = transform.Find ("KnifeShadow").gameObject;
 		knife.renderer.enabled = false;
-		Reset();
+        Reset();
+        Lift();
 		timerLimit = maxTimerLimit;
 	}
 	
@@ -24,28 +28,58 @@ public class KnifeController : MonoBehaviour {
 	void Update () {
 		deltaTime += Time.deltaTime;
 
-		if(deltaTime >= timerLimit + 5.0f) {
-			Reset();
-			knife.renderer.enabled = false;
-			knife.collider.enabled = false;
-		}
-		if(deltaTime >= timerLimit + 2.0f && !bIsSlicing) {
-			sliceFruits();
-			knife.collider.isTrigger = false;
-		}
-		if(deltaTime >= timerLimit && !knife.renderer.enabled) {
-			knife.collider.enabled = true;
-			knife.renderer.enabled = true;
-		}
+        switch (state)
+        {
+            case State.Idle:
+                if (deltaTime >= timerLimit) {
+                    state = State.Imminent;
+                    knifeShadow.SetActive(true);
+                }
+                break;
+            case State.Imminent:
+                if (deltaTime >= timerLimit + 2.0f) {
+                    knife.renderer.enabled = true;
+                    state = State.Chopping;
+                }
+                break;
+            case State.Chopping:
+                Chop();
+
+                if (transform.position.y <= 0) {
+                    state = State.OnBoard;
+                }
+                break;
+            case State.OnBoard:
+                if (deltaTime >= timerLimit + 3.0f) {
+                    state = State.Lifting;
+                }
+                break;
+            case State.Lifting:
+                Lift();
+
+                if (transform.position.y >= 4) {
+                    Reset();
+                }
+                break;
+            default:
+                break;
+        }
+	}
+	
+	private void Lift() {
+        Debug.Log("lift");
+		float step = chopSpeed * Time.deltaTime;
+		Vector3 target = transform.position;
+		target.y = 4;
+		transform.position = Vector3.MoveTowards(transform.position, target, step);
 	}
 
-	private void sliceFruits() {
-		bIsSlicing = true;
-		foreach(GameObject fruit in collidingFruits) {
-			Destroy(fruit);
-		}
-		PlayerController pc = (PlayerController) GameObject.Find("Player").GetComponent(typeof(PlayerController));
-		pc.updateHUD();
+    private void Chop() {
+        Debug.Log("chop");
+		float step = liftSpeed * Time.deltaTime;
+		Vector3 target = transform.position;
+		target.y = 0;
+		transform.position = Vector3.MoveTowards(transform.position, target, step);
 	}
 
 	private void SetRandomRotation() {
@@ -53,10 +87,12 @@ public class KnifeController : MonoBehaviour {
 	}
 
 	private void Reset() {
+        Debug.Log("reset");
+        state = State.Idle;
+        deltaTime = 0;
 		timerLimit = Random.Range(0,maxTimerLimit);
-		deltaTime = 0;
-		knife.collider.isTrigger = true;
-		bIsSlicing = false;
+		knife.renderer.enabled = false;
+		knifeShadow.SetActive(false);
 		SetRandomRotation();
 	}
 
