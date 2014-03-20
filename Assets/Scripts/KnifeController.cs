@@ -33,7 +33,7 @@ public class KnifeController : MonoBehaviour {
 			sliceFruits();
 			knife.collider.isTrigger = false;
 		}
-		if(deltaTime >= timerLimit && !renderer.enabled) {
+		if(deltaTime >= timerLimit && !knife.renderer.enabled) {
 			knife.collider.enabled = true;
 			knife.renderer.enabled = true;
 		}
