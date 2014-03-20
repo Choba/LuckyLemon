@@ -8,17 +8,26 @@ public class KnifeController : MonoBehaviour {
 	private float deltaTime;
 	private List<GameObject> collidingFruits = new List<GameObject>();
 	private GameObject knife;
-	private GameObject knifeShadow;
+    private GameObject knifeShadow;
+    private GameObject knifeCutCollider;
+
     private float chopSpeed = 20;
     private float liftSpeed = 5;
     private Vector3 acceleration;
     private enum State { Idle, Imminent, Chopping, OnBoard, Lifting };
     private State state;
 
+    public List<Vector3> knifePositions = new List<Vector3>();
+    public List<Vector3> knifeRotations = new List<Vector3>();
+    public List<ListWrapper> series = new List<ListWrapper>();
+    private int positionIndex;
+    private int seriesIndex;
+
 	// Use this for initialization
 	void Start () {
 		knife = transform.Find ("Knife").gameObject;
-		knifeShadow = transform.Find ("KnifeShadow").gameObject;
+        knifeShadow = transform.Find("KnifeShadow").gameObject;
+        knifeCutCollider = transform.Find("KnifeCut").gameObject;
 		knife.renderer.enabled = false;
         Reset();
         Lift();
@@ -44,6 +53,7 @@ public class KnifeController : MonoBehaviour {
                 }
                 break;
             case State.Chopping:
+                knifeCutCollider.collider.enabled = true;
                 Chop();
 
                 if (transform.position.y <= 1.5) {
@@ -51,6 +61,7 @@ public class KnifeController : MonoBehaviour {
                 }
                 break;
             case State.OnBoard:
+                knifeCutCollider.collider.enabled = false;
                 acceleration = Vector3.zero;
                 Vector3 pos = transform.position;
                 pos.y = 1.5f;
@@ -82,8 +93,22 @@ public class KnifeController : MonoBehaviour {
         transform.Translate(acceleration);
 	}
 
-	private void SetRandomRotation() {
-		transform.Rotate(0.0f, Random.Range(0.0f, 360.0f), 0.0f);
+	private void GotoNextPosition() {
+		//transform.Rotate(0.0f, Random.Range(0.0f, 360.0f), 0.0f);
+        if (positionIndex < knifePositions.Count - 1)
+        {
+            positionIndex++;
+        }
+        else
+        {
+            seriesIndex = Random.Range(0, series.Count);
+            positionIndex = 0;
+        }
+        ListWrapper lw = series[seriesIndex];
+        int i = lw.myList[positionIndex];
+
+        transform.position = knifePositions[i];
+        transform.eulerAngles = knifeRotations[i];
 	}
 
 	private void Reset() {
@@ -92,7 +117,7 @@ public class KnifeController : MonoBehaviour {
 		timerLimit = Random.Range(0,maxTimerLimit);
 		knife.renderer.enabled = false;
 		knifeShadow.SetActive(false);
-		SetRandomRotation();
+		GotoNextPosition();
 	}
 
 	void OnTriggerEnter(Collider other) {

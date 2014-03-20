@@ -3,7 +3,9 @@ using System.Collections;
 
 public class SliceCollider : MonoBehaviour {
 
-	void OnTriggerEnter(Collider other) {
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("destroy " + other.gameObject.tag);
 		if (other.gameObject.tag == "Fruit" || other.gameObject.tag == "Player") {
             Destroy(other.gameObject);
 		}
