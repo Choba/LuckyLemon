@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b8ddb90d0b326b349b67e4c1627e75d7
+guid: 241321ecc869046fb8cf0f3fb689a096
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
@@ -7,8 +7,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Sphere001
-    6400000: //RootNode
+    4300000: polySurface103
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -28,9 +27,9 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: .00999999978
+    globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
