@@ -23,8 +23,12 @@ public class KnifeController : MonoBehaviour {
     private int positionIndex;
     private int seriesIndex;
 
+    private float topY;
+
 	// Use this for initialization
 	void Start () {
+        topY = transform.position.y;
+
 		knife = transform.Find ("Knife").gameObject;
         knifeShadow = transform.Find("KnifeShadow").gameObject;
         knifeCutCollider = transform.Find("KnifeCut").gameObject;
@@ -56,7 +60,7 @@ public class KnifeController : MonoBehaviour {
                 knifeCutCollider.collider.enabled = true;
                 Chop();
 
-                if (transform.position.y <= 1.5) {
+                if (transform.position.y <= .07f) {
                     state = State.OnBoard;
                 }
                 break;
@@ -64,7 +68,7 @@ public class KnifeController : MonoBehaviour {
                 knifeCutCollider.collider.enabled = false;
                 acceleration = Vector3.zero;
                 Vector3 pos = transform.position;
-                pos.y = 1.5f;
+                pos.y = .07f;
 
                 transform.position = pos;
                 if (deltaTime >= timerLimit + 3.0f) {
@@ -74,7 +78,8 @@ public class KnifeController : MonoBehaviour {
             case State.Lifting:
                 Lift();
 
-                if (transform.position.y >= 4) {
+                if (transform.position.y >= topY)
+                {
                     Reset();
                 }
                 break;
