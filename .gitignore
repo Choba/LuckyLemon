@@ -33,5 +33,7 @@ Icon?
 ehthumbs.db
 Thumbs.db
 =======
-/3dsMax
->>>>>>> bc15415d6ae9e6635185f6e7f224b3050deb2c89
+/*.sln
+/Assets/_Scenes/MiniGame_.unity
+/Assets/_Scenes/MiniGame_.unity.meta
+/obj

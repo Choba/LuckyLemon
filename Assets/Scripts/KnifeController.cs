@@ -46,7 +46,7 @@ public class KnifeController : MonoBehaviour {
             case State.Chopping:
                 Chop();
 
-                if (transform.position.y <= 0) {
+                if (transform.position.y <= 1.5) {
                     state = State.OnBoard;
                 }
                 break;
@@ -70,35 +70,21 @@ public class KnifeController : MonoBehaviour {
 	
 	private void Lift() {
         Debug.Log("lift");
-<<<<<<< HEAD
         acceleration += Vector3.up * liftSpeed * Time.deltaTime;
 		//Vector3 target = transform.position;
 		//target.y = 4;
 		//transform.position = Vector3.Lerp(transform.position, target, step);
         transform.Translate(acceleration);
-=======
-		float step = chopSpeed * Time.deltaTime;
-		Vector3 target = transform.position;
-		target.y = 6;
-		transform.position = Vector3.MoveTowards(transform.position, target, step);
->>>>>>> bc15415d6ae9e6635185f6e7f224b3050deb2c89
 	}
 
     private void Chop() {
         Debug.Log("chop");
-<<<<<<< HEAD
 		//float step = chopSpeed * Time.deltaTime;
 		//Vector3 target = transform.position;
 		//target.y = 0;
         //transform.position = Vector3.Lerp(transform.position, target, step);
         acceleration += Vector3.down * chopSpeed * Time.deltaTime;
         transform.Translate(acceleration);
-=======
-		float step = liftSpeed * Time.deltaTime;
-		Vector3 target = transform.position;
-		target.y = 1.7;
-		transform.position = Vector3.MoveTowards(transform.position, target, step);
->>>>>>> bc15415d6ae9e6635185f6e7f224b3050deb2c89
 	}
 
 	private void SetRandomRotation() {
