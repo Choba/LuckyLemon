@@ -4,11 +4,10 @@ using System.Collections;
 public class EnemyManager : MonoBehaviour {
 	public GameObject enemyPrefab;
 	public float boundsX1,boundsX2,boundsY1,boundsY2;
-	public int enemyAmount = 10;
 
 	// Use this for initialization
 	void Awake () {
-		SpawnEnemies (enemyAmount);
+		//SpawnEnemies (5);
 	}
 
 	void SpawnEnemies(int amount) {
@@ -17,7 +16,7 @@ public class EnemyManager : MonoBehaviour {
 		for (int i = 0; i < amount; i++) {
 			Vector3 pos = new Vector3(Random.Range(boundsX1,boundsX2),0,Random.Range(boundsY1,boundsY2));
 			Debug.Log("spawn enemy at " + pos);
-			Instantiate (enemyPrefab, pos, Quaternion.identity);
+			GameObject enemy = Instantiate (enemyPrefab, pos, Quaternion.identity) as GameObject;
 		}
 	}
 }
