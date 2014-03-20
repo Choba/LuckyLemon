@@ -70,7 +70,7 @@ public class KnifeController : MonoBehaviour {
         Debug.Log("lift");
 		float step = chopSpeed * Time.deltaTime;
 		Vector3 target = transform.position;
-		target.y = 4;
+		target.y = 6;
 		transform.position = Vector3.MoveTowards(transform.position, target, step);
 	}
 
@@ -78,7 +78,7 @@ public class KnifeController : MonoBehaviour {
         Debug.Log("chop");
 		float step = liftSpeed * Time.deltaTime;
 		Vector3 target = transform.position;
-		target.y = 0;
+		target.y = 1.7;
 		transform.position = Vector3.MoveTowards(transform.position, target, step);
 	}
 
