@@ -8,13 +8,14 @@ public class EnemyController : MonoBehaviour {
 	void Start () {
 		Vector3 impulse = Time.deltaTime * velocity * new Vector3(Random.Range(-100,100),0,Random.Range(-100,100));
 		Debug.Log("start impulse " + impulse);
-		rigidbody.AddForce(impulse,ForceMode.Impulse);
+		//rigidbody.AddForce(impulse,ForceMode.Impulse);
+		rigidbody.velocity = velocity * new Vector3(Random.Range(-100,100),0,Random.Range(-100,100));
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		Vector3 vel = rigidbody.velocity;
-		vel.z = 0;
-		rigidbody.velocity = vel;
+		if (rigidbody.velocity.magnitude < velocity) {
+			rigidbody.velocity = rigidbody.velocity.normalized * velocity;
+		}
 	}
 }

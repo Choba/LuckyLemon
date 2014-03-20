@@ -8,10 +8,14 @@ public class KnifeController : MonoBehaviour {
 	private float deltaTime;
 	private List<GameObject> collidingFruits = new List<GameObject>();
 	private bool bIsSlicing;
+	private GameObject knife;
+	private GameObject topLight;
 
 	// Use this for initialization
 	void Start () {
-		renderer.enabled = false;
+		knife = transform.Find ("Knife").gameObject;
+		topLight = transform.Find ("TopLight").gameObject;
+		knife.renderer.enabled = false;
 		Reset();
 		timerLimit = maxTimerLimit;
 	}
@@ -20,14 +24,18 @@ public class KnifeController : MonoBehaviour {
 	void Update () {
 		deltaTime += Time.deltaTime;
 
-		if(deltaTime >= timerLimit + 3.0f) {
+		if(deltaTime >= timerLimit + 5.0f) {
 			Reset();
-			renderer.enabled = false;
+			knife.renderer.enabled = false;
+			knife.collider.enabled = false;
 		}
-		if(deltaTime >= timerLimit && !bIsSlicing) {
-			renderer.enabled = true;
+		if(deltaTime >= timerLimit + 2.0f && !bIsSlicing) {
 			sliceFruits();
-			collider.isTrigger = false;
+			knife.collider.isTrigger = false;
+		}
+		if(deltaTime >= timerLimit && !renderer.enabled) {
+			knife.collider.enabled = true;
+			knife.renderer.enabled = true;
 		}
 	}
 
@@ -47,7 +55,7 @@ public class KnifeController : MonoBehaviour {
 	private void Reset() {
 		timerLimit = Random.Range(0,maxTimerLimit);
 		deltaTime = 0;
-		collider.isTrigger = true;
+		knife.collider.isTrigger = true;
 		bIsSlicing = false;
 		SetRandomRotation();
 	}
