@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 	public float boostSpeed;
 	public float moveSpeed;
-	private bool bCanBoost = true;
+	private bool bIsBoosting = false;
 	public GUIText pointsText;
 	public GUIText winText;
 
@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour {
 		if(restartTimer > -1) {
 			restartTimer += Time.deltaTime;
 
-			if(restartTimer > 3.0f) {
+			if(restartTimer > 2.0f) {
 				RestartLevel();
 			}
 		}
@@ -31,26 +31,27 @@ public class PlayerController : MonoBehaviour {
 			boostTimer += Time.deltaTime;
 			
 			if(boostTimer > 3.0f) {
-				EnableBoost();
+				StopBoost();
 				boostTimer = -1;
 			}
 		}
 	}
 
-	void FixedUpdate() {
-		if ((Input.GetKeyDown (KeyCode.Space) || Input.touchCount >= 1) && bCanBoost){
-			//rigidbody.velocity = boostSpeed * rigidbody.velocity.normalized;
-			rigidbody.AddForce(rigidbody.velocity.normalized * boostSpeed, ForceMode.Impulse);
-			bCanBoost = false;
-			boostTimer = 0; //starts the boost timer
-		}
-		
+	void FixedUpdate() {		
 		float moveHorizontal = Input.acceleration.x * 2 + Input.GetAxis ("Horizontal");
 		float moveVertical = Input.acceleration.y * 2 + Input.GetAxis ("Vertical");
 		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 		
-		rigidbody.AddForce(movement * moveSpeed * Time.deltaTime);
+		//rigidbody.AddForce(movement * moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
+		rigidbody.velocity = movement * (bIsBoosting ? boostSpeed : moveSpeed) * Time.deltaTime;
+
+		if ((Input.GetKeyDown (KeyCode.Space) || Input.touchCount >= 1) && !bIsBoosting){
+			//rigidbody.velocity = boostSpeed * rigidbody.velocity.normalized;
+			bIsBoosting = true;
+			boostTimer = 0; //starts the boost timer
+		}
 	}
+
 
 	void OnCollisionEnter(Collision col) {
 
@@ -72,8 +73,8 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	private void EnableBoost() {
-		bCanBoost = true;
+	private void StopBoost() {
+		bIsBoosting = false;
 	}
 
 	private void RestartLevel() {
