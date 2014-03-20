@@ -52,6 +52,10 @@ public class KnifeController : MonoBehaviour {
                 break;
             case State.OnBoard:
                 acceleration = Vector3.zero;
+                Vector3 pos = transform.position;
+                pos.y = 1.5f;
+
+                transform.position = pos;
                 if (deltaTime >= timerLimit + 3.0f) {
                     state = State.Lifting;
                 }
@@ -69,20 +73,11 @@ public class KnifeController : MonoBehaviour {
 	}
 	
 	private void Lift() {
-        Debug.Log("lift");
         acceleration += Vector3.up * liftSpeed * Time.deltaTime;
-		//Vector3 target = transform.position;
-		//target.y = 4;
-		//transform.position = Vector3.Lerp(transform.position, target, step);
         transform.Translate(acceleration);
 	}
 
     private void Chop() {
-        Debug.Log("chop");
-		//float step = chopSpeed * Time.deltaTime;
-		//Vector3 target = transform.position;
-		//target.y = 0;
-        //transform.position = Vector3.Lerp(transform.position, target, step);
         acceleration += Vector3.down * chopSpeed * Time.deltaTime;
         transform.Translate(acceleration);
 	}
@@ -92,7 +87,6 @@ public class KnifeController : MonoBehaviour {
 	}
 
 	private void Reset() {
-        Debug.Log("reset");
         state = State.Idle;
         deltaTime = 0;
 		timerLimit = Random.Range(0,maxTimerLimit);
