@@ -11,6 +11,9 @@ public class KnifeController : MonoBehaviour {
     private GameObject knifeShadow;
     private GameObject knifeCutCollider;
 
+    public List<AudioClip> swingSounds = new List<AudioClip>();
+    public List<AudioClip> missSounds = new List<AudioClip>();
+
     private float chopSpeed = 20;
     private float liftSpeed = 5;
     private Vector3 acceleration;
@@ -54,6 +57,8 @@ public class KnifeController : MonoBehaviour {
                 if (deltaTime >= timerLimit + 2.0f) {
                     knife.renderer.enabled = true;
                     state = State.Chopping;
+                    audio.clip = swingSounds[Random.Range(0, swingSounds.Count)];
+                    audio.Play();
                 }
                 break;
             case State.Chopping:
@@ -61,6 +66,8 @@ public class KnifeController : MonoBehaviour {
                 Chop();
 
                 if (transform.position.y <= .07f) {
+                    audio.clip = missSounds[Random.Range(0, missSounds.Count)];
+                    audio.Play();
                     state = State.OnBoard;
                 }
                 break;

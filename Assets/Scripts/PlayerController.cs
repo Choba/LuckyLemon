@@ -98,6 +98,11 @@ public class PlayerController : MonoBehaviour {
         }
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 		rigidbody.velocity = movement * (bIsBoosting ? boostSpeed : moveSpeed) * Time.deltaTime;
+        //Quaternion lookRot = Quaternion.LookRotation(rigidbody.velocity, Vector3.up);
+        //Vector3 lookRot = transform.eulerAngles;
+        //lookRot.y  = Vector3.Angle(rigidbody.velocity, Vector3.up);
+        //Debug.Log("vel angle:" + Vector3.Angle(rigidbody.velocity, Vector3.up));
+        //transform.eulerAngles = lookRot;
 	}
 
 	void OnCollisionEnter(Collision col) {
