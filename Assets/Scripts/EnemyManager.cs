@@ -7,7 +7,7 @@ public class EnemyManager : MonoBehaviour {
 	public int enemyAmount = 10;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		SpawnEnemies (enemyAmount);
 	}
 

@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour {
 	void Start() {
 		restartTimer = -1;
 		boostTimer = -1;
-		updateHUD();
-		winText.text = "";
+        winText.text = "";
+        updateHUD();
 	}
 
 	void Update() {
