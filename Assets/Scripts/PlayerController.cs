@@ -105,6 +105,10 @@ public class PlayerController : MonoBehaviour {
         //transform.eulerAngles = lookRot;
 	}
 
+    void LateUpdate() {
+        transform.rotation = Quaternion.LookRotation(rigidbody.velocity);
+    }
+
 	void OnCollisionEnter(Collision col) {
 
 	}
