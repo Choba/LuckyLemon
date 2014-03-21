@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2014-03-20T22:06:44Z</created><keywords></keywords><modified>2014-03-20T22:06:44Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <library_images>
+    <image id="file4-image" name="file4"><init_from>file:///Users/valentin/Desktop/OrangeTextureCartoon.jpg</init_from></image>
+  </library_images>
+  <library_materials>
+    <material id="OrangeMat" name="OrangeMat">
+      <instance_effect url="#OrangeMat-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="OrangeMat-fx" name="OrangeMat">
+      <profile_COMMON>
+        <technique sid="standard">
+          <phong>
+            <emission>
+              <color sid="emission">0.000000  0.000000 0.000000 1.000000</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0.000000  0.000000 0.000000 1.000000</color>
+            </ambient>
+            <diffuse>
+              <texture texture="file4-image" texcoord="CHANNEL0">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU sid="wrapU0">TRUE</wrapU>
+                    <wrapV sid="wrapV0">TRUE</wrapV>
+                    <blend_mode>NONE</blend_mode>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.500000  0.500000 0.500000 1.000000</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">6.311791</float>
+            </shininess>
+            <reflective>
+              <color sid="reflective">0.000000  0.000000 0.000000 1.000000</color>
+            </reflective>
+            <reflectivity>
+              <float sid="reflectivity">0.500000</float>
+            </reflectivity>
+            <transparent opaque="RGB_ZERO">
+              <color sid="transparent">0.000000  0.000000 0.000000 1.000000</color>
+            </transparent>
+            <transparency>
+              <float sid="transparency">1.000000</float>
+            </transparency>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="Orange-lib" name="OrangeMesh">
+      <mesh>
+        <source id="Orange-POSITION">
+          <float_array id="Orange-POSITION-array" count="102">
+0.763768 -1.486672 -0.763768
+0.000000 -1.486672 -1.080131
+-0.763768 -1.486672 -0.763768
+-1.080131 -1.486672 0.000000
+-0.763768 -1.486672 0.763768
+0.000000 -1.486672 1.080131
+0.763768 -1.486672 0.763768
+1.080131 -1.486672 0.000000
+1.235802 -0.567858 -1.235802
+0.000000 -0.567858 -1.747688
+-1.235802 -0.567858 -1.235802
+-1.747688 -0.567858 0.000000
+-1.235802 -0.567858 1.235802
+0.000000 -0.567858 1.747688
+1.235802 -0.567858 1.235802
+1.747688 -0.567858 0.000000
+1.235802 0.567858 -1.235802
+0.000000 0.567858 -1.747688
+-1.235802 0.567858 -1.235802
+-1.747688 0.567858 0.000000
+-1.235802 0.567858 1.235802
+0.000000 0.567858 1.747688
+1.235802 0.567858 1.235802
+1.747688 0.567858 0.000000
+0.763768 1.486672 -0.763768
+0.000000 1.486672 -1.080131
+-0.763768 1.486672 -0.763768
+-1.080131 1.486672 0.000000
+-0.763768 1.486672 0.763768
+0.000000 1.486672 1.080131
+0.763768 1.486672 0.763768
+1.080131 1.486672 0.000000
+0.000000 -1.837628 0.000000
+0.000000 1.837628 0.000000
+</float_array>
+          <technique_common>
+            <accessor source="#Orange-POSITION-array" count="34" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Orange-Normal0">
+          <float_array id="Orange-Normal0-array" count="102">
+0.516522 -0.682941 -0.516523
+0.000000 -0.682941 -0.730473
+-0.516523 -0.682941 -0.516523
+-0.730473 -0.682941 -0.000000
+-0.516523 -0.682941 0.516523
+0.000000 -0.682941 0.730473
+0.516523 -0.682941 0.516523
+0.730473 -0.682941 0.000000
+0.684220 -0.252361 -0.684220
+0.000000 -0.252361 -0.967633
+-0.684220 -0.252361 -0.684220
+-0.967633 -0.252361 0.000000
+-0.684220 -0.252361 0.684220
+0.000000 -0.252361 0.967633
+0.684220 -0.252361 0.684220
+0.967633 -0.252361 0.000000
+0.684220 0.252361 -0.684220
+0.000000 0.252361 -0.967633
+-0.684220 0.252361 -0.684220
+-0.967633 0.252361 0.000000
+-0.684220 0.252361 0.684220
+0.000000 0.252361 0.967633
+0.684220 0.252361 0.684220
+0.967633 0.252361 -0.000000
+0.516522 0.682941 -0.516523
+0.000000 0.682941 -0.730473
+-0.516523 0.682941 -0.516523
+-0.730473 0.682941 0.000000
+-0.516523 0.682941 0.516523
+0.000000 0.682941 0.730473
+0.516523 0.682941 0.516523
+0.730473 0.682941 -0.000000
+0.000000 -1.000000 -0.000000
+0.000000 1.000000 0.000000
+</float_array>
+          <technique_common>
+            <accessor source="#Orange-Normal0-array" count="34" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Orange-UV0">
+          <float_array id="Orange-UV0-array" count="104">
+0.000000 0.200000
+0.125000 0.200000
+0.250000 0.200000
+0.375000 0.200000
+0.500000 0.200000
+0.625000 0.200000
+0.750000 0.200000
+0.875000 0.200000
+1.000000 0.200000
+0.000000 0.400000
+0.125000 0.400000
+0.250000 0.400000
+0.375000 0.400000
+0.500000 0.400000
+0.625000 0.400000
+0.750000 0.400000
+0.875000 0.400000
+1.000000 0.400000
+0.000000 0.600000
+0.125000 0.600000
+0.250000 0.600000
+0.375000 0.600000
+0.500000 0.600000
+0.625000 0.600000
+0.750000 0.600000
+0.875000 0.600000
+1.000000 0.600000
+0.000000 0.800000
+0.125000 0.800000
+0.250000 0.800000
+0.375000 0.800000
+0.500000 0.800000
+0.625000 0.800000
+0.750000 0.800000
+0.875000 0.800000
+1.000000 0.800000
+0.062500 0.000000
+0.187500 0.000000
+0.312500 0.000000
+0.437500 0.000000
+0.562500 0.000000
+0.687500 0.000000
+0.812500 0.000000
+0.937500 0.000000
+0.062500 1.000000
+0.187500 1.000000
+0.312500 1.000000
+0.437500 1.000000
+0.562500 1.000000
+0.687500 1.000000
+0.812500 1.000000
+0.937500 1.000000
+</float_array>
+          <technique_common>
+            <accessor source="#Orange-UV0-array" count="52" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Orange-VERTEX">
+          <input semantic="POSITION" source="#Orange-POSITION"/>
+          <input semantic="NORMAL" source="#Orange-Normal0"/>
+        </vertices>
+        <triangles count="64" material="OrangeMat"><input semantic="VERTEX" offset="0" source="#Orange-VERTEX"/><input semantic="TEXCOORD" offset="1" set="0" source="#Orange-UV0"/><p> 1 1 9 10 0 0 0 0 9 10 8 9 2 2 9 10 1 1 9 10 2 2 10 11 11 12 2 2 3 3 11 12 10 11 2 2 4 4 11 12 3 3 11 12 4 4 12 13 13 14 12 13 4 4 13 14 4 4 5 5 13 14 6 6 14 15 6 6 13 14 5 5 14 15 6 6 15 16 6 6 7 7 15 16 15 16 0 8 8 17 0 8 15 16 7 7 9 10 17 19 8 9 8 9 17 19 16 18 10 11 18 20 9 10 9 10 18 20 17 19 19 21 10 11 11 12 10 11 19 21 18 20 20 22 11 12 12 13 11 12 20 22 19 21 21 23 20 22 12 13 21 23 12 13 13 14 22 24 21 23 13 14 22 24 13 14 14 15 22 24 14 15 23 25 14 15 15 16 23 25 23 25 15 16 16 26 15 16 8 17 16 26 17 19 24 27 16 18 24 27 17 19 25 28 18 20 26 29 17 19 17 19 26 29 25 28 19 21 26 29 18 20 26 29 19 21 27 30 28 31 19 21 20 22 19 21 28 31 27 30 28 31 21 23 29 32 21 23 28 31 20 22 30 33 29 32 21 23 21 23 22 24 30 33 30 33 23 25 31 34 23 25 30 33 22 24 31 34 23 25 24 35 23 25 16 26 24 35 1 1 0 0 32 36 2 2 1 1 32 37 3 3 2 2 32 38 4 4 3 3 32 39 5 5 4 4 32 40 6 6 5 5 32 41 7 7 6 6 32 42 0 8 7 7 32 43 24 27 25 28 33 44 25 28 26 29 33 45 26 29 27 30 33 46 27 30 28 31 33 47 28 31 29 32 33 48 29 32 30 33 33 49 30 33 31 34 33 50 31 34 24 35 33 51</p></triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Orange" name="Orange">
+      <node name="Orange" id="Orange" sid="Orange"><matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix><instance_geometry url="#Orange-lib"><bind_material><technique_common><instance_material symbol="OrangeMat" target="#OrangeMat"/></technique_common></bind_material></instance_geometry><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node>
+      <extra><technique profile="MAX3D"><frame_rate>24.000000</frame_rate></technique><technique profile="FCOLLADA"><start_time>0.041667</start_time><end_time>2.000000</end_time></technique></extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Orange"></instance_visual_scene>
+  </scene>
+</COLLADA>

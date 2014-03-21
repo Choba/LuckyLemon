@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /3dsMax
 /Temp
 /LuckyLemon-Notebook.sln
@@ -5,3 +6,44 @@
 /Assembly-CSharp-vs-Notebook.csproj
 /LuckyLemon-csharp-Notebook.sln
 /Library
+=======
+<<<<<<< HEAD
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Obj/
+UnityGenerated/
+Library/
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+=======
+/*.sln
+/Assets/_Scenes/MiniGame_.unity
+/Assets/_Scenes/MiniGame_.unity.meta
+/obj
+>>>>>>> 615e85273a2edd797719e4d4b7001a4a3e1d7b3b

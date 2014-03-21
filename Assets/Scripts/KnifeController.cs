@@ -7,16 +7,37 @@ public class KnifeController : MonoBehaviour {
 	private float timerLimit;
 	private float deltaTime;
 	private List<GameObject> collidingFruits = new List<GameObject>();
-	private bool bIsSlicing;
 	private GameObject knife;
-	private GameObject topLight;
+    private GameObject knifeShadow;
+    private GameObject knifeCutCollider;
+
+    public List<AudioClip> swingSounds = new List<AudioClip>();
+    public List<AudioClip> missSounds = new List<AudioClip>();
+
+    private float chopSpeed = 20;
+    private float liftSpeed = 5;
+    private Vector3 acceleration;
+    private enum State { Idle, Imminent, Chopping, OnBoard, Lifting };
+    private State state;
+
+    public List<Vector3> knifePositions = new List<Vector3>();
+    public List<Vector3> knifeRotations = new List<Vector3>();
+    public List<ListWrapper> series = new List<ListWrapper>();
+    private int positionIndex;
+    private int seriesIndex;
+
+    private float topY;
 
 	// Use this for initialization
 	void Start () {
+        topY = transform.position.y;
+
 		knife = transform.Find ("Knife").gameObject;
-		topLight = transform.Find ("TopLight").gameObject;
+        knifeShadow = transform.Find("KnifeShadow").gameObject;
+        knifeCutCollider = transform.Find("KnifeCut").gameObject;
 		knife.renderer.enabled = false;
-		Reset();
+        Reset();
+        Lift();
 		timerLimit = maxTimerLimit;
 	}
 	
@@ -24,40 +45,91 @@ public class KnifeController : MonoBehaviour {
 	void Update () {
 		deltaTime += Time.deltaTime;
 
-		if(deltaTime >= timerLimit + 5.0f) {
-			Reset();
-			knife.renderer.enabled = false;
-			knife.collider.enabled = false;
-		}
-		if(deltaTime >= timerLimit + 2.0f && !bIsSlicing) {
-			sliceFruits();
-			knife.collider.isTrigger = false;
-		}
-		if(deltaTime >= timerLimit && !knife.renderer.enabled) {
-			knife.collider.enabled = true;
-			knife.renderer.enabled = true;
-		}
+        switch (state)
+        {
+            case State.Idle:
+                if (deltaTime >= timerLimit) {
+                    state = State.Imminent;
+                    knifeShadow.SetActive(true);
+                }
+                break;
+            case State.Imminent:
+                if (deltaTime >= timerLimit + 2.0f) {
+                    knife.renderer.enabled = true;
+                    state = State.Chopping;
+                    audio.clip = swingSounds[Random.Range(0, swingSounds.Count)];
+                    audio.Play();
+                }
+                break;
+            case State.Chopping:
+                knifeCutCollider.collider.enabled = true;
+                Chop();
+
+                if (transform.position.y <= .07f) {
+                    audio.clip = missSounds[Random.Range(0, missSounds.Count)];
+                    audio.Play();
+                    state = State.OnBoard;
+                }
+                break;
+            case State.OnBoard:
+                knifeCutCollider.collider.enabled = false;
+                acceleration = Vector3.zero;
+                Vector3 pos = transform.position;
+                pos.y = .07f;
+
+                transform.position = pos;
+                if (deltaTime >= timerLimit + 3.0f) {
+                    state = State.Lifting;
+                }
+                break;
+            case State.Lifting:
+                Lift();
+
+                if (transform.position.y >= topY)
+                {
+                    Reset();
+                }
+                break;
+            default:
+                break;
+        }
+	}
+	
+	private void Lift() {
+        acceleration += Vector3.up * liftSpeed * Time.deltaTime;
+        transform.Translate(acceleration);
 	}
 
-	private void sliceFruits() {
-		bIsSlicing = true;
-		foreach(GameObject fruit in collidingFruits) {
-			Destroy(fruit);
-		}
-		PlayerController pc = (PlayerController) GameObject.Find("Player").GetComponent(typeof(PlayerController));
-		pc.updateHUD();
+    private void Chop() {
+        acceleration += Vector3.down * chopSpeed * Time.deltaTime;
+        transform.Translate(acceleration);
 	}
 
-	private void SetRandomRotation() {
-		transform.Rotate(0.0f, Random.Range(0.0f, 360.0f), 0.0f);
+	private void GotoNextPosition() {
+		//transform.Rotate(0.0f, Random.Range(0.0f, 360.0f), 0.0f);
+        if (positionIndex < knifePositions.Count - 1)
+        {
+            positionIndex++;
+        }
+        else
+        {
+            seriesIndex = Random.Range(0, series.Count);
+            positionIndex = 0;
+        }
+        ListWrapper lw = series[seriesIndex];
+        int i = lw.myList[positionIndex];
+
+        transform.position = knifePositions[i];
+        transform.eulerAngles = knifeRotations[i];
 	}
 
 	private void Reset() {
+        state = State.Idle;
+        deltaTime = 0;
 		timerLimit = Random.Range(0,maxTimerLimit);
-		deltaTime = 0;
-		knife.collider.isTrigger = true;
-		bIsSlicing = false;
-		SetRandomRotation();
+		knife.renderer.enabled = false;
+		knifeShadow.SetActive(false);
+		GotoNextPosition();
 	}
 
 	void OnTriggerEnter(Collider other) {
