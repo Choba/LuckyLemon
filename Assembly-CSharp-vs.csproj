@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\EnemyController.cs" />
      <Compile Include="Assets\Scripts\EnemyManager.cs" />
      <Compile Include="Assets\Scripts\KnifeController.cs" />
+     <Compile Include="Assets\Scripts\KnifeController_.cs" />
      <Compile Include="Assets\Scripts\KnifePosition.cs" />
      <Compile Include="Assets\Scripts\LevelController.cs" />
      <Compile Include="Assets\Scripts\ListWrapper.cs" />

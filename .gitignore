@@ -1,4 +1,13 @@
 <<<<<<< HEAD
+/3dsMax
+/Temp
+/LuckyLemon-Notebook.sln
+/Assembly-CSharp-Notebook.csproj
+/Assembly-CSharp-vs-Notebook.csproj
+/LuckyLemon-csharp-Notebook.sln
+/Library
+=======
+<<<<<<< HEAD
 # =============== #
 # Unity generated #
 # =============== #
@@ -37,3 +46,4 @@ Thumbs.db
 /Assets/_Scenes/MiniGame_.unity
 /Assets/_Scenes/MiniGame_.unity.meta
 /obj
+>>>>>>> 615e85273a2edd797719e4d4b7001a4a3e1d7b3b

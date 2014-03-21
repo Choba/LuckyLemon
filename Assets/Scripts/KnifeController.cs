@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class KnifeController : MonoBehaviour {
-	public float maxTimerLimit = 10;
+	public float maxTimerLimit = 1;
+    float timeScaling = 1;
 	private float timerLimit;
 	private float deltaTime;
 	private List<GameObject> collidingFruits = new List<GameObject>();
@@ -26,6 +27,11 @@ public class KnifeController : MonoBehaviour {
     private int positionIndex;
     private int seriesIndex;
 
+    public float speedIncrease = 0.01f;
+
+    bool inCutPattern;
+    bool inCutPatternTrigger;
+
     private float topY;
 
 	// Use this for initialization
@@ -44,6 +50,23 @@ public class KnifeController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		deltaTime += Time.deltaTime;
+        maxTimerLimit *= (1 - speedIncrease * Time.deltaTime);
+        timeScaling *= (1 - speedIncrease * Time.deltaTime);
+        chopSpeed *= (1 + speedIncrease * Time.deltaTime);
+        liftSpeed *= (1 + speedIncrease * Time.deltaTime);
+
+        if (inCutPattern && !inCutPatternTrigger)
+        {
+            inCutPatternTrigger = true;
+            timeScaling /= 5;
+            maxTimerLimit /= 5;
+        }
+        else if (!inCutPattern && inCutPatternTrigger)
+        {
+            inCutPatternTrigger = false;
+            timeScaling *= 5;
+            maxTimerLimit *= 5;
+        }
 
         switch (state)
         {
@@ -54,7 +77,7 @@ public class KnifeController : MonoBehaviour {
                 }
                 break;
             case State.Imminent:
-                if (deltaTime >= timerLimit + 2.0f) {
+                if (deltaTime >= timerLimit + 2.0f * timeScaling) {
                     knife.renderer.enabled = true;
                     state = State.Chopping;
                     audio.clip = swingSounds[Random.Range(0, swingSounds.Count)];
@@ -78,7 +101,7 @@ public class KnifeController : MonoBehaviour {
                 pos.y = .07f;
 
                 transform.position = pos;
-                if (deltaTime >= timerLimit + 3.0f) {
+                if (deltaTime >= timerLimit + 3.0f * timeScaling) {
                     state = State.Lifting;
                 }
                 break;
@@ -126,10 +149,18 @@ public class KnifeController : MonoBehaviour {
 	private void Reset() {
         state = State.Idle;
         deltaTime = 0;
-		timerLimit = Random.Range(0,maxTimerLimit);
+		timerLimit = maxTimerLimit;
 		knife.renderer.enabled = false;
 		knifeShadow.SetActive(false);
 		GotoNextPosition();
+        if (positionIndex == 0)
+        {
+            inCutPattern = true;
+        }
+        else if (positionIndex == knifePositions.Count - 1)
+        {
+            inCutPattern = false;
+        }
 	}
 
 	void OnTriggerEnter(Collider other) {

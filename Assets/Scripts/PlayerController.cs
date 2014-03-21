@@ -106,7 +106,10 @@ public class PlayerController : MonoBehaviour {
 	}
 
     void LateUpdate() {
-        transform.rotation = Quaternion.LookRotation(rigidbody.velocity);
+        if (rigidbody.velocity.magnitude > 1)
+        {
+            transform.rotation = Quaternion.LookRotation(rigidbody.velocity, Vector3.up);
+        }
     }
 
 	void OnCollisionEnter(Collision col) {
