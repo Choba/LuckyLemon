@@ -2,10 +2,10 @@
 # =============== #
 # Unity generated #
 # =============== #
-Temp/
-Obj/
-UnityGenerated/
-Library/
+Temp/*
+Obj/*
+UnityGenerated/*
+Library/*
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
@@ -14,9 +14,11 @@ ExportedObj/
 *.svd
 *.userprefs
 *.csproj
+/*.csproj
 *.pidb
 *.suo
 *.sln
+/*.sln
 *.user
 *.unityproj
 *.booproj
@@ -33,12 +35,17 @@ Icon?
 ehthumbs.db
 Thumbs.db
 =======
-/*.sln
-/Assets/_Scenes/MiniGame_.unity
-/Assets/_Scenes/MiniGame_.unity.meta
-/obj
-/*.csproj
-/*.csproj
-/*.sln
-/*.sln
+
 =======
+#Un-ignore these specific files
+!Library/*.asset
+!Library/AssetImportState
+!Library/AssetVersioning.db
+!Library/BuildPlayer.prefs
+!Library/ScriptMapper
+!Library/assetservercachev3
+!Library/expandedItems
+!Library/guidmapper
+!Library/unity default resources
+!Library/unity editor resources
+!Library/metadata/
