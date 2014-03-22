@@ -1724,6 +1724,7 @@ MonoBehaviour:
   - myList: 030000000200000005000000010000000000000004000000
   - myList: 000000000500000004000000030000000200000001000000
   - myList: 040000000100000000000000040000000200000003000000
+  speedIncrease: .00999999978
 --- !u!82 &596615675
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2770,13 +2771,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d6840e6176aba4d94ad01a7f319c91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostSpeed: 10
   moveSpeed: 300
   pointsText: {fileID: 1949911649}
   winText: {fileID: 971353001}
   playerNum: 0
   opponent: {fileID: 2129689963}
   invertControls: 0
+  stompRadius: 500
+  stompPower: 50
 --- !u!54 &1138514223
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5757,13 +5759,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d6840e6176aba4d94ad01a7f319c91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostSpeed: 10
   moveSpeed: 300
   pointsText: {fileID: 1949911649}
   winText: {fileID: 971353001}
   playerNum: 1
   opponent: {fileID: 1138514221}
   invertControls: 0
+  stompRadius: 50
+  stompPower: 1
 --- !u!54 &2129689966
 Rigidbody:
   m_ObjectHideFlags: 0

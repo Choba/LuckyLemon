@@ -2,9 +2,7 @@
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
-	public float boostSpeed;
 	public float moveSpeed;
-	private bool bIsBoosting = false;
 	public GUIText pointsText;
 	public GUIText winText;
     public enum Players { player1, player2 };
@@ -15,12 +13,13 @@ public class PlayerController : MonoBehaviour {
     float doubleSpeedTimer;
     float increasedSizeTimer;
 
+    public float stompRadius = 50;
+    public float stompPower = 1;
+
 	private float restartTimer;
-	private float boostTimer;
 
 	void Start() {
 		restartTimer = -1;
-		boostTimer = -1;
 		updateHUD();
 		winText.text = "";
 	}
@@ -34,14 +33,6 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-		if(boostTimer > -1) {
-			boostTimer += Time.deltaTime;
-			
-			if(boostTimer > 3.0f) {
-				StopBoost();
-				boostTimer = -1;
-			}
-		}
         if (invertControlsTimer > 0)
         {
             invertControlsTimer -= Time.deltaTime;
@@ -68,6 +59,10 @@ public class PlayerController : MonoBehaviour {
         {
             decreaseSize();
             increasedSizeTimer = 0;
+        }
+
+        if (Input.GetButtonDown("Jump")) {
+            Stomp();
         }
 	}
 
@@ -97,12 +92,8 @@ public class PlayerController : MonoBehaviour {
             moveVertical = -moveVertical;
         }
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-		rigidbody.velocity = movement * (bIsBoosting ? boostSpeed : moveSpeed) * Time.deltaTime;
-        //Quaternion lookRot = Quaternion.LookRotation(rigidbody.velocity, Vector3.up);
-        //Vector3 lookRot = transform.eulerAngles;
-        //lookRot.y  = Vector3.Angle(rigidbody.velocity, Vector3.up);
-        //Debug.Log("vel angle:" + Vector3.Angle(rigidbody.velocity, Vector3.up));
-        //transform.eulerAngles = lookRot;
+		rigidbody.AddForce(movement * moveSpeed * Time.deltaTime);
+        
 	}
 
     void LateUpdate() {
@@ -112,9 +103,33 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-	void OnCollisionEnter(Collision col) {
+    void Stomp() {
+        Debug.Log("stomp");
+        Vector3 stompPos = transform.position;
+        Collider[] objectsInRange = Physics.OverlapSphere(transform.position, stompRadius);
 
-	}
+        foreach (Collider col in objectsInRange) {
+            PlayerController enemy = col.GetComponent<PlayerController>();
+            Debug.Log("stomp hit " + enemy);
+            if (enemy && col.rigidbody) {
+                /*RaycastHit hit;
+                bool exposed = false;
+
+                if (Physics.Raycast (location, (col.transform.position - location), hit)) {
+                    exposed = (hit.collider = enemyCollider);
+                }
+ 
+                if (exposed) {
+                    // Damage Enemy! with a linear falloff of damage amount
+                    var proximity : float = (location - enemy.transform.position).magnitude;
+                    var effect : float = 1 - (proximity / radius);
+                    enemy.ApplyDamage(damage * effect);
+                }*/
+
+                col.rigidbody.AddExplosionForce(stompPower, transform.position, stompRadius, 3.0F);
+            }
+        }
+    }
 
 	void OnDestroy() {
 		renderer.enabled = false;
@@ -130,10 +145,6 @@ public class PlayerController : MonoBehaviour {
 			winText.text = "YOU WIN!!!";
 			restartTimer = 0;
 		}*/
-	}
-
-	private void StopBoost() {
-		bIsBoosting = false;
 	}
 
 	private void RestartLevel() {
