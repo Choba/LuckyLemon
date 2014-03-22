@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
-    public float moveSpeed;
+	public float moveSpeed;
     public float speedIncreasePerCoin = 0.01f;
 
     public GUIText pointsText;
@@ -11,49 +11,38 @@ public class PlayerController : MonoBehaviour {
     public Players playerNum;
     public GameObject opponent;
     public int coins;
-
-    public float stompRadius = .5f;
+	
+	public float stompRadius = .5f;
     public float stompPower = 1;
 
     void Start() {
         updateHUD();
     }
 
-    void Update() {
-        if (Input.GetButtonDown("Stomp" + (playerNum == Players.player1 ? 1 : 2))) {
-            Stomp();
+	void Update() {
+        if (Input.GetButtonDown("Stomp" + (int)playerNum)) {
+			Stomp();
         }
-    }
-
+	}
+    
     void FixedUpdate() {
-        /*if ((Input.GetKeyDown (KeyCode.Space) || Input.touchCount >= 1) && bCanBoost){
-            //rigidbody.velocity = boostSpeed * rigidbody.velocity.normalized;
-            rigidbody.AddForce(rigidbody.velocity.normalized * boostSpeed, ForceMode.Impulse);
-            bCanBoost = false;
-            boostTimer = 0; //starts the boost timer
-        }*/
-        float moveHorizontal = 0;
+		float moveHorizontal = 0;
         float moveVertical = 0;
 
-        if (playerNum == Players.player1) {
-            moveHorizontal = Input.acceleration.x * 2 + Input.GetAxis("Horizontal1");
-            moveVertical = Input.acceleration.y * 2 + Input.GetAxis("Vertical1");
-        } else {
-            moveHorizontal = Input.acceleration.x * 2 + Input.GetAxis("Horizontal2");
-            moveVertical = Input.acceleration.y * 2 + Input.GetAxis("Vertical2");
-        }
+        moveHorizontal = Input.acceleration.x * 2 + Input.GetAxis("Horizontal" + (int)playerNum);
+        moveVertical = Input.acceleration.y * 2 + Input.GetAxis("Vertical" + (int)playerNum);
+
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
         rigidbody.AddForce(movement * moveSpeed * Time.deltaTime);
-
-    }
+	}
 
     void LateUpdate() {
         if (rigidbody.velocity.magnitude > 1) {
             transform.rotation = Quaternion.LookRotation(rigidbody.velocity, Vector3.up);
         }
     }
-
-    void Stomp() {
+	
+	void Stomp() {
         Debug.Log("stomp");
         Collider[] objectsInRange = Physics.OverlapSphere(transform.position, stompRadius);
 
@@ -87,24 +76,19 @@ public class PlayerController : MonoBehaviour {
 
     void OnDestroy() {
         renderer.enabled = false;
-        Debug.Log("player " + playerNum + " destroyed");
+        print("player " + playerNum + " destroyed");
         GameManager.EndGame((int)playerNum % 2 + 1);
     }
 
-    public void updateHUD() {
-        /*int fruits = GameObject.FindGameObjectsWithTag("Fruit").Length;
-        pointsText.text = "Fruits: " + fruits.ToString();
+	public void updateHUD() {
 
-        if(fruits == 0) {
-            winText.text = "YOU WIN!!!";
-            restartTimer = 0;
-        }*/
     }
 
     public void getCoins(int amount) {
-        coins += amount;
+		coins += amount;
         moveSpeed *= 1.0f + (speedIncreasePerCoin * amount);
     }
+
     public void loseCoins(int amount) {
         coins -= amount;
         moveSpeed /= 1.0f + (speedIncreasePerCoin * amount);

@@ -33,11 +33,11 @@ public class GameManager : MonoBehaviour {
     {
         winningPlayerId = winningPlayer;
         restartTimer = 0;
-        Debug.Log("player " + winningPlayerId + " won");
+        print("player " + winningPlayerId + " won");
     }
 
     private void RestartLevel() {
-        Debug.Log("restart");
+        print("restart");
         Application.LoadLevel(Application.loadedLevel);
     }
 }
