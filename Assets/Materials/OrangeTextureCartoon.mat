@@ -7,9 +7,8 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: OrangeTextureCartoon
-  m_Shader: {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 80db790515c35634ead2560fa6da88db, type: 3}
   m_ShaderKeywords: []
-  m_CustomRenderQueue: -1
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -20,9 +19,78 @@ Material:
           m_Texture: {fileID: 2800000, guid: fa6ceeb5865f2e94cb23f129dd600254, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-    m_Floats: {}
+      data:
+        first:
+          name: _BaseTexture
+        second:
+          m_Texture: {fileID: 2800000, guid: fa6ceeb5865f2e94cb23f129dd600254, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Glowmap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Alpha
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+    m_Floats:
+      data:
+        first:
+          name: _BaseTextureStrength
+        second: 0
+      data:
+        first:
+          name: _EmissiveMult
+        second: 1
+      data:
+        first:
+          name: _GlowmapStrength
+        second: .5
+      data:
+        first:
+          name: _RimPower
+        second: .465671659
+      data:
+        first:
+          name: _RimMult
+        second: 1
+      data:
+        first:
+          name: _Specularity
+        second: .567164183
+      data:
+        first:
+          name: _Glossiness
+        second: .089552246
+      data:
+        first:
+          name: _Brightness
+        second: .470149249
     m_Colors:
       data:
         first:
           name: _Color
         second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _BaseColor
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _AmbientColor
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _EmissiveColor
+        second: {r: .301470578, g: .18088235, b: 0, a: 1}
+      data:
+        first:
+          name: _RimColor
+        second: {r: 1, g: .835699797, b: .404411793, a: 1}
