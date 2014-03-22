@@ -1,27 +1,23 @@
 ﻿using UnityEngine;
-using System;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
-    public float moveSpeed;
+	public float boostSpeed;
+	public float moveSpeed;
     public float speedIncreasePerCoin = 0.01f;
-
-	public GUIText pointsText;
-	public GUIText winText;
+	private bool bIsBoosting = false;
     public enum Players { player1, player2 };
     public Players playerNum;
     public GameObject opponent;
     public int coins;
-
-    public float stompRadius = .5f;
+	
+	public float stompRadius = .5f;
     public float stompPower = 1;
 
 	private float restartTimer;
 
 	void Start() {
 		restartTimer = -1;
-		updateHUD();
-		winText.text = "";
 	}
 
 	void Update() {
@@ -32,10 +28,10 @@ public class PlayerController : MonoBehaviour {
 				RestartLevel();
 			}
 		}
-
-        if (Input.GetButtonDown("Stomp" + (playerNum == Players.player1 ? 1 : 2))) {
+		if (Input.GetButtonDown("Stomp" + (playerNum == Players.player1 ? 1 : 2))) {
             Stomp();
         }
+        
 	}
 
 	void FixedUpdate() {
@@ -59,18 +55,19 @@ public class PlayerController : MonoBehaviour {
 		    moveVertical = Input.acceleration.y * 2 + Input.GetAxis ("Vertical2");
         }
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-		rigidbody.AddForce(movement * moveSpeed * Time.deltaTime);
-        
+		rigidbody.velocity = movement * (bIsBoosting ? boostSpeed : moveSpeed) * Time.deltaTime;
+        //Quaternion lookRot = Quaternion.LookRotation(rigidbody.velocity, Vector3.up);
+        //Vector3 lookRot = transform.eulerAngles;
+        //lookRot.y  = Vector3.Angle(rigidbody.velocity, Vector3.up);
+        //Debug.Log("vel angle:" + Vector3.Angle(rigidbody.velocity, Vector3.up));
+        //transform.eulerAngles = lookRot;
 	}
 
-    void LateUpdate() {
-        if (rigidbody.velocity.magnitude > 1)
-        {
-            transform.rotation = Quaternion.LookRotation(rigidbody.velocity, Vector3.up);
-        }
-    }
+	void OnCollisionEnter(Collision col) {
 
-    void Stomp() {
+	}
+	
+	void Stomp() {
         Debug.Log("stomp");
         Vector3 stompPos = transform.position;
         Collider[] objectsInRange = Physics.OverlapSphere(transform.position, stompRadius);
@@ -119,6 +116,10 @@ public class PlayerController : MonoBehaviour {
 			winText.text = "YOU WIN!!!";
 			restartTimer = 0;
 		}*/
+	}
+
+	private void StopBoost() {
+		bIsBoosting = false;
 	}
 
 	private void RestartLevel() {

@@ -35,7 +35,7 @@ public class KnifeController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         topY = transform.position.y;
-
+        seriesIndex = Random.Range(0, series.Count);
 		knife = transform.Find ("Knife").gameObject;
         knifeShadow = transform.Find("KnifeShadow").gameObject;
         knifeCutCollider = transform.Find("KnifeCut").gameObject;
@@ -122,7 +122,7 @@ public class KnifeController : MonoBehaviour {
 
 	private void GotoNextPosition() {
 		//transform.Rotate(0.0f, Random.Range(0.0f, 360.0f), 0.0f);
-        if (positionIndex < knifePositions.Count - 1)
+        if (positionIndex < series[seriesIndex].myList.Count - 1)
         {
             positionIndex++;
         }
@@ -132,6 +132,7 @@ public class KnifeController : MonoBehaviour {
             positionIndex = 0;
         }
         ListWrapper lw = series[seriesIndex];
+        print(positionIndex);
         int i = lw.myList[positionIndex];
 
         transform.position = knifePositions[i];
