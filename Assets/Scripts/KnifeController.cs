@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class KnifeController : MonoBehaviour {
 	public float maxTimerLimit = 1;
     float timeScaling = 1;
+    float cutPatternTimeScaling = 10;
 	private float timerLimit;
 	private float deltaTime;
 	private List<GameObject> collidingFruits = new List<GameObject>();
@@ -15,8 +16,8 @@ public class KnifeController : MonoBehaviour {
     public List<AudioClip> swingSounds = new List<AudioClip>();
     public List<AudioClip> missSounds = new List<AudioClip>();
 
-    private float chopSpeed = 20;
-    private float liftSpeed = 5;
+    private float chopSpeed = 40;
+    private float liftSpeed = 10;
     private Vector3 acceleration;
     private enum State { Idle, Imminent, Chopping, OnBoard, Lifting };
     private State state;
@@ -24,13 +25,10 @@ public class KnifeController : MonoBehaviour {
     public List<Vector3> knifePositions = new List<Vector3>();
     public List<Vector3> knifeRotations = new List<Vector3>();
     public List<ListWrapper> series = new List<ListWrapper>();
-    private int positionIndex;
+    private int positionIndex = -1;
     private int seriesIndex;
 
     public float speedIncrease = 0.01f;
-
-    bool inCutPattern;
-    bool inCutPatternTrigger;
 
     private float topY;
 
@@ -55,29 +53,22 @@ public class KnifeController : MonoBehaviour {
         chopSpeed *= (1 + speedIncrease * Time.deltaTime);
         liftSpeed *= (1 + speedIncrease * Time.deltaTime);
 
-        if (inCutPattern && !inCutPatternTrigger)
-        {
-            inCutPatternTrigger = true;
-            timeScaling /= 5;
-            maxTimerLimit /= 5;
-        }
-        else if (!inCutPattern && inCutPatternTrigger)
-        {
-            inCutPatternTrigger = false;
-            timeScaling *= 5;
-            maxTimerLimit *= 5;
-        }
-
         switch (state)
         {
             case State.Idle:
                 if (deltaTime >= timerLimit) {
                     state = State.Imminent;
+                    
                     knifeShadow.SetActive(true);
                 }
                 break;
             case State.Imminent:
-                if (deltaTime >= timerLimit + 2.0f * timeScaling) {
+                if (deltaTime >= timerLimit + 2.0f * timeScaling / cutPatternTimeScaling)
+                {
+                    if (positionIndex == 0)
+                    {
+                        cutPatternTimeScaling = 10;
+                    }
                     knife.renderer.enabled = true;
                     state = State.Chopping;
                     audio.clip = swingSounds[Random.Range(0, swingSounds.Count)];
@@ -101,7 +92,8 @@ public class KnifeController : MonoBehaviour {
                 pos.y = .07f;
 
                 transform.position = pos;
-                if (deltaTime >= timerLimit + 3.0f * timeScaling) {
+                if (deltaTime >= timerLimit + 3.0f * timeScaling / cutPatternTimeScaling)
+                {
                     state = State.Lifting;
                 }
                 break;
@@ -119,12 +111,12 @@ public class KnifeController : MonoBehaviour {
 	}
 	
 	private void Lift() {
-        acceleration += Vector3.up * liftSpeed * Time.deltaTime;
+        acceleration += Vector3.up * (liftSpeed) * Time.deltaTime;
         transform.Translate(acceleration);
 	}
 
     private void Chop() {
-        acceleration += Vector3.down * chopSpeed * Time.deltaTime;
+        acceleration += Vector3.down * (chopSpeed) * Time.deltaTime;
         transform.Translate(acceleration);
 	}
 
@@ -149,18 +141,15 @@ public class KnifeController : MonoBehaviour {
 	private void Reset() {
         state = State.Idle;
         deltaTime = 0;
-		timerLimit = maxTimerLimit;
+        
 		knife.renderer.enabled = false;
 		knifeShadow.SetActive(false);
 		GotoNextPosition();
         if (positionIndex == 0)
         {
-            inCutPattern = true;
+            cutPatternTimeScaling = 1;
         }
-        else if (positionIndex == knifePositions.Count - 1)
-        {
-            inCutPattern = false;
-        }
+        timerLimit = maxTimerLimit / cutPatternTimeScaling;
 	}
 
 	void OnTriggerEnter(Collider other) {
