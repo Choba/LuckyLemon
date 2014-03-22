@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
-	public float moveSpeed;
+    public float moveSpeed;
+    public float speedIncreasePerCoin = 0.01f;
+
 	public GUIText pointsText;
 	public GUIText winText;
     public enum Players { player1, player2 };
     public Players playerNum;
     public GameObject opponent;
-    public bool invertControls;
-    float invertControlsTimer;
-    float doubleSpeedTimer;
-    float increasedSizeTimer;
+    public int coins;
 
-    public float stompRadius = 50;
+    public float stompRadius = .5f;
     public float stompPower = 1;
 
 	private float restartTimer;
@@ -33,35 +33,7 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-        if (invertControlsTimer > 0)
-        {
-            invertControlsTimer -= Time.deltaTime;
-        }
-        else if (invertControlsTimer < 0)
-        {
-            DeInvertControls();
-            invertControlsTimer = 0;
-        }
-        if (doubleSpeedTimer > 0)
-        {
-            doubleSpeedTimer -= Time.deltaTime;
-        }
-        else if (doubleSpeedTimer < 0)
-        {
-            halveSpeed();
-            doubleSpeedTimer = 0;
-        }
-        if (increasedSizeTimer > 0)
-        {
-            increasedSizeTimer -= Time.deltaTime;
-        }
-        else if (increasedSizeTimer < 0)
-        {
-            decreaseSize();
-            increasedSizeTimer = 0;
-        }
-
-        if (Input.GetButtonDown("Jump")) {
+        if (Input.GetButtonDown("Stomp" + (playerNum == Players.player1 ? 1 : 2))) {
             Stomp();
         }
 	}
@@ -86,11 +58,6 @@ public class PlayerController : MonoBehaviour {
 		    moveHorizontal = Input.acceleration.x * 2 + Input.GetAxis ("Horizontal2");
 		    moveVertical = Input.acceleration.y * 2 + Input.GetAxis ("Vertical2");
         }
-        if (invertControls)
-        {
-            moveHorizontal = -moveHorizontal;
-            moveVertical = -moveVertical;
-        }
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 		rigidbody.AddForce(movement * moveSpeed * Time.deltaTime);
         
@@ -109,24 +76,31 @@ public class PlayerController : MonoBehaviour {
         Collider[] objectsInRange = Physics.OverlapSphere(transform.position, stompRadius);
 
         foreach (Collider col in objectsInRange) {
-            PlayerController enemy = col.GetComponent<PlayerController>();
-            Debug.Log("stomp hit " + enemy);
-            if (enemy && col.rigidbody) {
-                /*RaycastHit hit;
-                bool exposed = false;
+            try {
+                PlayerController enemy = col.transform.parent.GetComponent<PlayerController>();
 
-                if (Physics.Raycast (location, (col.transform.position - location), hit)) {
-                    exposed = (hit.collider = enemyCollider);
-                }
+                if (enemy && enemy.playerNum != playerNum)
+                {
+                    /*RaycastHit hit;
+                    bool exposed = false;
+
+                    if (Physics.Raycast (location, (col.transform.position - location), hit)) {
+                        exposed = (hit.collider = enemyCollider);
+                    }
  
-                if (exposed) {
-                    // Damage Enemy! with a linear falloff of damage amount
-                    var proximity : float = (location - enemy.transform.position).magnitude;
-                    var effect : float = 1 - (proximity / radius);
-                    enemy.ApplyDamage(damage * effect);
-                }*/
+                    if (exposed) {
+                        // Damage Enemy! with a linear falloff of damage amount
+                        var proximity : float = (location - enemy.transform.position).magnitude;
+                        var effect : float = 1 - (proximity / radius);
+                        enemy.ApplyDamage(damage * effect);
+                    }*/
 
-                col.rigidbody.AddExplosionForce(stompPower, transform.position, stompRadius, 3.0F);
+                    Debug.Log("stomp hit " + enemy + " at dist " + (col.transform.position - transform.position).magnitude);
+                    enemy.rigidbody.AddExplosionForce(stompPower, transform.position, stompRadius, .2f);
+                }
+            }
+            catch (NullReferenceException e) {
+                /* empty */
             }
         }
     }
@@ -151,34 +125,14 @@ public class PlayerController : MonoBehaviour {
 		Application.LoadLevel(Application.loadedLevel);
 	}
 
-    public void doubleSpeed(float dur)
+    public void getCoins(int amount)
     {
-        moveSpeed *= 2;
-        doubleSpeedTimer = dur;
+        coins += amount;
+        moveSpeed *= 1.0f + (speedIncreasePerCoin * amount);
     }
-    public void halveSpeed()
+    public void loseCoins(int amount)
     {
-        moveSpeed /= 2;
-    }
-    public void InvertControls(float dur)
-    {
-        invertControls = true;
-        invertControlsTimer = dur;
-        print(invertControls);
-    }
-    public void DeInvertControls()
-    {
-        invertControls = false;
-    }
-
-    public void increaseSize(float dur)
-    {
-        transform.localScale *= 1.5f;
-        increasedSizeTimer = dur;
-    }
-
-    public void decreaseSize()
-    {
-        transform.localScale /= 1.5f;
+        coins -= amount;
+        moveSpeed /= 1.0f + (speedIncreasePerCoin * amount);
     }
 }

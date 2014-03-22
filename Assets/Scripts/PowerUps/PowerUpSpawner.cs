@@ -23,7 +23,11 @@ public class PowerUpSpawner : MonoBehaviour {
         float random = Random.value * 100;
         if (random < probability && currentWaitTime > nextTick)
         {
-            spawnPowerUp();
+            int rand = (int)Random.Range(1, 5);
+            for (int i = 0; i < rand; i++)
+            {
+                spawnPowerUp();
+            }
             resetWaitTime();
             nextTick += checkTick;
         }
@@ -35,8 +39,8 @@ public class PowerUpSpawner : MonoBehaviour {
 
     void spawnPowerUp()
     {
-        Vector3 pos = new Vector3(Random.Range(boundsX1, boundsX2), 0, Random.Range(boundsY1, boundsY2));
-        GameObject powerUp = (GameObject) Instantiate(powerUpPrefab, pos, Quaternion.identity);
+        Vector3 pos = new Vector3(Random.Range(boundsX1, boundsX2), .5f, Random.Range(boundsY1, boundsY2));
+        Instantiate(powerUpPrefab, pos, Quaternion.identity);
     }
 
     void resetWaitTime()
@@ -46,3 +50,4 @@ public class PowerUpSpawner : MonoBehaviour {
         nextTick = 0;
     }
 }
+

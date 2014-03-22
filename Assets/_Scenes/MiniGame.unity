@@ -2771,14 +2771,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d6840e6176aba4d94ad01a7f319c91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 300
+  moveSpeed: 5000
+  speedIncreasePerCoin: .00999999978
   pointsText: {fileID: 1949911649}
   winText: {fileID: 971353001}
   playerNum: 0
   opponent: {fileID: 2129689963}
-  invertControls: 0
-  stompRadius: 500
-  stompPower: 50
+  coins: 0
+  stompRadius: 2
+  stompPower: 1800
 --- !u!54 &1138514223
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2788,7 +2789,7 @@ Rigidbody:
   m_GameObject: {fileID: 1138514221}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 2
+  m_Drag: 10
   m_AngularDrag: .0500000007
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -3896,6 +3897,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8bfafdce1caf24ea9ac46cceb3b3db9d, type: 3}
   - {fileID: 8300000, guid: 0faef9d3b0b3e4d858b9b2c40ff8fbb5, type: 3}
   - {fileID: 8300000, guid: 5403889adb91f447b8ad2fa14bed367c, type: 3}
+  hitPenalty: 0
 --- !u!82 &1504599877
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5759,14 +5761,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d6840e6176aba4d94ad01a7f319c91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 300
+  moveSpeed: 5000
+  speedIncreasePerCoin: .00999999978
   pointsText: {fileID: 1949911649}
   winText: {fileID: 971353001}
   playerNum: 1
   opponent: {fileID: 1138514221}
-  invertControls: 0
-  stompRadius: 50
-  stompPower: 1
+  coins: 0
+  stompRadius: 2
+  stompPower: 1800
 --- !u!54 &2129689966
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5776,7 +5779,7 @@ Rigidbody:
   m_GameObject: {fileID: 2129689963}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 2
+  m_Drag: 10
   m_AngularDrag: .0500000007
   m_UseGravity: 1
   m_IsKinematic: 0
