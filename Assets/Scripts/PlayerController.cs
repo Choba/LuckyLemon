@@ -104,6 +104,10 @@ public class PlayerController : MonoBehaviour {
     {
         coins += amount;
         moveSpeed *= 1.0f + (speedIncreasePerCoin * amount);
-        print("Coins: " + coins + "/MoveSpeed: " + moveSpeed);
+    }
+    public void loseCoins(int amount)
+    {
+        coins -= amount;
+        moveSpeed /= 1.0f + (speedIncreasePerCoin * amount);
     }
 }
