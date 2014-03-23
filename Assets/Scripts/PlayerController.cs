@@ -40,14 +40,14 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
         //rigidbody.AddForce(movement * moveSpeed * Time.deltaTime);
-        rigidbody.velocity = movement * moveSpeed *Time.deltaTime;
+        GetComponentInChildren<Rigidbody>().velocity = movement * moveSpeed *Time.deltaTime;
 
         //meshAnimator.SetFloat("Velocity", Vector3.Magnitude(rigidbody.velocity));
 	}
 
     void LateUpdate() {
-		if (lockRotationToVelocity && rigidbody.velocity.magnitude > 1) {
-            transform.rotation = Quaternion.LookRotation(rigidbody.velocity, Vector3.up);
+		if (lockRotationToVelocity && GetComponentInChildren<Rigidbody>().velocity.magnitude > 1) {
+			transform.rotation = Quaternion.LookRotation(GetComponentInChildren<Rigidbody>().velocity, Vector3.up);
         }
     }
 	
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour {
 
                     //Debug.Log("stomp hit " + enemy + " at dist " + (col.transform.position - transform.position).magnitude);
 
-                    enemy.rigidbody.AddExplosionForce(stompPower, transform.position, stompRadius, .2f);
+					enemy.GetComponentInChildren<Rigidbody>().AddExplosionForce(stompPower, transform.position, stompRadius, .2f);
                 }
             } catch (NullReferenceException e) {
                 

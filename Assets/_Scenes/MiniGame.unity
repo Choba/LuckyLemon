@@ -1472,7 +1472,8 @@ Prefab:
       propertyPath: opponent
       value: 
       objectReference: {fileID: 2129689963}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 83239b3dd7a86b343a94f1b7e5e4516d, type: 2}
   m_RootGameObject: {fileID: 1797954090}
   m_IsPrefabParent: 0
@@ -1519,6 +1520,7 @@ GameObject:
   - 23: {fileID: 791377258}
   - 95: {fileID: 791377257}
   - 135: {fileID: 791377260}
+  - 54: {fileID: 791377261}
   m_Layer: 11
   m_Name: Lemon
   m_TagString: Player
@@ -1596,6 +1598,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.91999996
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &791377261
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 791377255}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &797294237
 GameObject:
   m_ObjectHideFlags: 0
@@ -2406,7 +2423,6 @@ GameObject:
   - 4: {fileID: 1138514227}
   - 33: {fileID: 1138514226}
   - 23: {fileID: 1138514224}
-  - 54: {fileID: 1138514223}
   - 114: {fileID: 1138514222}
   - 95: {fileID: 1138514225}
   m_Layer: 0
@@ -2441,22 +2457,6 @@ MonoBehaviour:
   stompRadius: 2
   stompPower: 5000
   lockRotationToVelocity: 0
---- !u!54 &1138514223
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 5400000, guid: 83239b3dd7a86b343a94f1b7e5e4516d,
-    type: 2}
-  m_PrefabInternal: {fileID: 766113535}
-  m_GameObject: {fileID: 1138514221}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 2
-  m_AngularDrag: .0500000007
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!23 &1138514224
 Renderer:
   m_ObjectHideFlags: 0
@@ -3169,6 +3169,7 @@ MonoBehaviour:
   boundsX2: 7
   boundsY1: -4
   boundsY2: 4
+  spawnOffset: .5
   powerUpPrefab: {fileID: 100000, guid: 5dadf6dd92dfb6c4d8f6ef32e1ed59e3, type: 2}
 --- !u!1 &1720442625
 GameObject:
@@ -3182,6 +3183,7 @@ GameObject:
   - 23: {fileID: 1720442628}
   - 95: {fileID: 1720442627}
   - 135: {fileID: 1720442630}
+  - 54: {fileID: 1720442631}
   m_Layer: 11
   m_Name: Orange
   m_TagString: Player
@@ -3258,6 +3260,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.83762789
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1720442631
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1720442625}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1797954090
 GameObject:
   m_ObjectHideFlags: 0
@@ -3584,7 +3601,6 @@ GameObject:
   - 4: {fileID: 2129689964}
   - 33: {fileID: 2129689969}
   - 23: {fileID: 2129689967}
-  - 54: {fileID: 2129689966}
   - 114: {fileID: 2129689965}
   m_Layer: 0
   m_Name: Player
@@ -3630,22 +3646,6 @@ MonoBehaviour:
   stompRadius: 2
   stompPower: 5000
   lockRotationToVelocity: 0
---- !u!54 &2129689966
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 5400008, guid: 76be706e54d1fd744b2d88f624f039aa,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2129689963}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 2
-  m_AngularDrag: .0500000007
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!23 &2129689967
 Renderer:
   m_ObjectHideFlags: 0
