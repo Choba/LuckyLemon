@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour {
 
 			restartTimer = 0;
 			KnifeController knife = GameObject.FindObjectOfType (typeof(KnifeController)) as KnifeController;
-			knife.SetEnabled (false);
+			knife.End();
 			print ("Player " + winningPlayerId + " survived!\nPlayer " + (winningPlayerId % 2 + 1) + ", you're lemonade :(");
 			gameIsRunning = false;
 		}

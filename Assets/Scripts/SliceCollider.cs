@@ -12,12 +12,17 @@ public class SliceCollider : MonoBehaviour {
         if (other.CompareTag("Player"))
         {
 			print ("cut player " + other.gameObject);
+
+			ParticleSystem particles = other.transform.parent.GetComponentInChildren<ParticleSystem>();
+			particles.transform.position = other.transform.position;
+			particles.particleSystem.Play();
+
             audio.clip = killSounds[Random.Range(0, killSounds.Count)];
             audio.Play();
             if (other.gameObject.transform.parent.gameObject.GetComponent<PlayerController>().coins <= hitPenalty)
             {
-                Destroy(other.gameObject.transform.parent.gameObject);
-                other.gameObject.transform.parent.gameObject.GetComponent<PlayerController>().coins = 0;
+				other.gameObject.transform.parent.gameObject.GetComponent<PlayerController>().Kill();
+				Destroy(other.gameObject);
             }
             else
             {

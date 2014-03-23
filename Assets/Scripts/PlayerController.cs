@@ -40,8 +40,9 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
         //rigidbody.AddForce(movement * moveSpeed * Time.deltaTime);
-        GetComponentInChildren<Rigidbody>().velocity = movement * moveSpeed *Time.deltaTime;
-
+		if (GetComponentInChildren<Rigidbody> () != null) {
+			GetComponentInChildren<Rigidbody> ().velocity = movement * moveSpeed * Time.deltaTime;
+		}
         //meshAnimator.SetFloat("Velocity", Vector3.Magnitude(rigidbody.velocity));
 	}
 
@@ -93,7 +94,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void OnDestroy() {
+    public void Kill() {
         renderer.enabled = false;
         print("player " + playerNum + " destroyed");
         GameManager.Instance.EndGame((int)playerNum % 2 + 1);
