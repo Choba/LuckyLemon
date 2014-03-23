@@ -61,7 +61,6 @@ public class GameManager : MonoBehaviour {
 		if (gameIsRunning) {
 			winningPlayerId = winningPlayer;
 			GrantPoints ();
-
 			restartTimer = 0;
 			KnifeController knife = GameObject.FindObjectOfType (typeof(KnifeController)) as KnifeController;
 			knife.SetEnabled (false);

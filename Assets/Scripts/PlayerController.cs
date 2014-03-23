@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
     public bool noControls;
     float noControlsTimer;
     public Transform meshTransform;
+    public Animator endscreenAnimator;
 
     public GUIText pointsText;
     public enum Players { player1 = 1, player2 = 2 };
@@ -108,6 +109,14 @@ public class PlayerController : MonoBehaviour {
     void OnDestroy() {
         renderer.enabled = false;
         print("player " + playerNum + " destroyed");
+        if (playerNum == Players.player1)
+        {
+            endscreenAnimator.SetTrigger("OrangeWins");
+        }
+        else
+        {
+            endscreenAnimator.SetTrigger("LemonWins");
+        }
         GameManager.Instance.EndGame((int)playerNum % 2 + 1);
     }
 
