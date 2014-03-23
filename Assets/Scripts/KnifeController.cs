@@ -19,7 +19,7 @@ public class KnifeController : MonoBehaviour {
     private float chopSpeed = 40;
     private float liftSpeed = 10;
     private Vector3 acceleration;
-    private enum State { Idle, Imminent, Chopping, OnBoard, Lifting };
+    public enum State { Idle, Imminent, Chopping, OnBoard, Lifting };
     private State state;
 
     public List<Vector3> knifePositions = new List<Vector3>();
@@ -29,6 +29,8 @@ public class KnifeController : MonoBehaviour {
     private int seriesIndex;
 
     public float speedIncrease = 0.01f;
+
+	private float endTimer = -1f;
 
     private float topY;
 
@@ -52,6 +54,14 @@ public class KnifeController : MonoBehaviour {
         timeScaling *= (1 - speedIncrease * Time.deltaTime);
         chopSpeed *= (1 + speedIncrease * Time.deltaTime);
         liftSpeed *= (1 + speedIncrease * Time.deltaTime);
+
+		if (endTimer > -1) {
+			endTimer += Time.deltaTime;
+
+			if(endTimer > 0.5f) {
+				active = false;
+			}
+		}
 
         switch (state)
         {
@@ -108,6 +118,15 @@ public class KnifeController : MonoBehaviour {
             default:
                 break;
         }
+	}
+
+	public void End() {
+		state = State.Lifting;
+		endTimer = 0;
+	}
+
+	public void GotoState(State newState) {
+		state = newState;
 	}
 	
 	private void Lift() {
