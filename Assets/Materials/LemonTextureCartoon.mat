@@ -24,14 +24,14 @@ Material:
         first:
           name: _BaseTexture
         second:
-          m_Texture: {fileID: 2800000, guid: 26edb9048d8784f05bfe996527fd0f15, type: 3}
+          m_Texture: {fileID: 2800000, guid: 9ae7ac8a99113ec458290f9fb7288436, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _FaceTexture
         second:
-          m_Texture: {fileID: 2800000, guid: 2113287a28efcdb4c8d040319a674734, type: 3}
+          m_Texture: {fileID: 2800000, guid: b07dac6e2accc0646864c0b8a9d71488, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -56,31 +56,63 @@ Material:
       data:
         first:
           name: _Brightness
-        second: .558368862
+        second: 1
       data:
         first:
           name: _EmissiveMult
-        second: 1
+        second: .25999999
       data:
         first:
           name: _RimPower
-        second: .410447806
+        second: .67473352
       data:
         first:
           name: _RimMult
-        second: 1
+        second: 1.29999995
       data:
         first:
           name: _Specularity
-        second: .358208954
+        second: 1.28678036
       data:
         first:
           name: _Glossiness
-        second: .089552246
+        second: .375266522
       data:
         first:
           name: _GlowmapStrength
         second: .5
+      data:
+        first:
+          name: _contrast
+        second: .357142895
+      data:
+        first:
+          name: _shadingBringhtness
+        second: .642857134
+      data:
+        first:
+          name: _rate
+        second: 1.71428573
+      data:
+        first:
+          name: _outlineThickness
+        second: .607142866
+      data:
+        first:
+          name: _min
+        second: .928571463
+      data:
+        first:
+          name: _pow
+        second: 2.14285707
+      data:
+        first:
+          name: _brightnessB
+        second: .767857134
+      data:
+        first:
+          name: _threshold
+        second: 7.6785717
     m_Colors:
       data:
         first:

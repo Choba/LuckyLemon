@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: No Name
-  m_Shader: {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: ac48368a95277d24d840bc70f85f9588, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -20,9 +20,71 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-    m_Floats: {}
+      data:
+        first:
+          name: _BaseTexture
+        second:
+          m_Texture: {fileID: 2800000, guid: 55735680522a56b438946edfe5e0ba99, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Alpha
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+    m_Floats:
+      data:
+        first:
+          name: _Brightness
+        second: 1.14285719
+      data:
+        first:
+          name: _EmissiveMult
+        second: 1
+      data:
+        first:
+          name: _RimPower
+        second: .89464283
+      data:
+        first:
+          name: _RimMult
+        second: 3
+      data:
+        first:
+          name: _Specularity
+        second: 2
+      data:
+        first:
+          name: _Glossiness
+        second: .321428567
+      data:
+        first:
+          name: _lol
+        second: 1.28571427
+      data:
+        first:
+          name: _alpha
+        second: 1.14285731
+      data:
+        first:
+          name: _alpha_mult
+        second: 2
     m_Colors:
       data:
         first:
           name: _Color
         second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _rimColor
+        second: {r: 1, g: 0, b: 0, a: 1}
+      data:
+        first:
+          name: _baseColor
+        second: {r: .199999928, g: 1, b: 0, a: 1}
+      data:
+        first:
+          name: _emissiveColor
+        second: {r: 1, g: .667647064, b: .16911763, a: 1}

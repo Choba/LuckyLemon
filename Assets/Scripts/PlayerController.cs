@@ -110,6 +110,12 @@ public class PlayerController : MonoBehaviour {
         renderer.enabled = false;
         print("player " + playerNum + " destroyed");
         GameManager.Instance.EndGame((int)playerNum % 2 + 1);
+
+		foreach (Transform child in transform) {	
+			if (child.CompareTag("PlayerCorpse")) {
+				child.gameObject.SetActive(true);
+			}
+		}
     }
 
 	public void updateHUD() {

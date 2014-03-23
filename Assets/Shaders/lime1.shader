@@ -4,17 +4,17 @@ Shader "fruitshader/lime1"
 	{
 _BaseColor("_BaseColor", Color) = (1,1,1,1)
 _BaseTexture("_BaseTexture", 2D) = "white" {}
-_BaseTextureStrength("_BaseTextureStrength", Range(1,0) ) = 1
-_Brightness("_Brightness", Range(0,1) ) = 0.5
-_EmissiveColor("_EmissiveColor", Color) = (0,0,0,1)
+_Brightness("_Brightness", Range(0,2) ) = 0.5
 _EmissiveMult("_EmissiveMult", Float) = 1
 _FaceTexture("_FaceTexture", 2D) = "black" {}
 _Alpha("_Alpha", 2D) = "white" {}
-_RimColor("_RimColor", Color) = (1,1,1,1)
 _RimPower("_RimPower", Range(4,0.3) ) = 4
 _RimMult("_RimMult", Float) = 1
 _Specularity("_Specularity", Range(0,2) ) = 0
 _Glossiness("_Glossiness", Range(0,1) ) = 0
+_outlineThickness("_outlineThickness", Range(1,0) ) = 0.5
+_threshold("_threshold", Range(0,10) ) = 0.5
+_brightnessB("_brightnessB", Range(0,1) ) = 0.5
 
 	}
 	
@@ -29,7 +29,7 @@ _Glossiness("_Glossiness", Range(0,1) ) = 0
 		}
 
 		
-Cull Back
+Cull Off
 ZWrite On
 ZTest LEqual
 ColorMask RGBA
@@ -44,17 +44,17 @@ Fog{
 
 float4 _BaseColor;
 sampler2D _BaseTexture;
-float _BaseTextureStrength;
 float _Brightness;
-float4 _EmissiveColor;
 float _EmissiveMult;
 sampler2D _FaceTexture;
 sampler2D _Alpha;
-float4 _RimColor;
 float _RimPower;
 float _RimMult;
 float _Specularity;
 float _Glossiness;
+float _outlineThickness;
+float _threshold;
+float _brightnessB;
 
 			struct EditorSurfaceOutput {
 				half3 Albedo;
@@ -115,8 +115,9 @@ return c;
 			}
 			
 			struct Input {
-				float2 uv_BaseTexture;
+				float4 color : COLOR;
 float3 viewDir;
+float2 uv_BaseTexture;
 float4 meshUV;
 float2 uv_Alpha;
 
@@ -143,27 +144,40 @@ o.meshUV.zw = v.texcoord1.xy;
 				o.Specular = 0.0;
 				o.Custom = 0.0;
 				
-float4 Multiply13=_EmissiveColor * _EmissiveMult.xxxx;
-float4 Tex2D0=tex2D(_BaseTexture,(IN.uv_BaseTexture.xyxy).xy);
-float4 Lerp2=lerp(Tex2D0,_BaseColor,_BaseTextureStrength.xxxx);
 float4 Fresnel0_1_NoInput = float4(0,0,1,1);
 float4 Fresnel0=(1.0 - dot( normalize( float4( IN.viewDir.x, IN.viewDir.y,IN.viewDir.z,1.0 ).xyz), normalize( Fresnel0_1_NoInput.xyz ) )).xxxx;
+float4 Invert0= float4(1.0, 1.0, 1.0, 1.0) - Fresnel0;
+float4 Add0=Invert0 + _outlineThickness.xxxx;
+float4 Min0=min(Add0,float4( 1.0, 1.0, 1.0, 1.0 ));
+float4 Min1=min(Min0,_brightnessB.xxxx);
+float4 Log0=log(Min1);
+float4 Max0=max(_brightnessB.xxxx,Min0);
+float4 Pow1=pow(Max0,_threshold.xxxx);
+float4 Add2=Log0 + Pow1;
+float4 Tex2D0=tex2D(_BaseTexture,(IN.uv_BaseTexture.xyxy).xy);
+float4 Multiply6=_BaseColor * Tex2D0;
+float4 Multiply13=Multiply6 * _EmissiveMult.xxxx;
 float4 Pow0=pow(Fresnel0,_RimPower.xxxx);
-float4 Multiply3=Lerp2 * Pow0;
+float4 Multiply3=Multiply6 * Pow0;
 float4 Multiply14=Multiply3 * _RimMult.xxxx;
 float4 Lerp3=lerp(Multiply13,Multiply14,Multiply14);
-float4 Multiply1=_Brightness.xxxx * Lerp2;
+float4 Multiply1=_Brightness.xxxx * Multiply6;
 float4 Add1=Lerp3 + Multiply1;
 float4 Tex2D2=tex2D(_FaceTexture,(IN.meshUV.zwzw).xy);
 float4 Lerp0=lerp(Add1,Tex2D2,Tex2D2.aaaa);
+float4 Multiply0=Add2 * Lerp0;
+float4 Multiply2=IN.color * Multiply0;
+float4 Multiply4=IN.color * _Specularity.xxxx;
+float4 Invert1= float4(1.0, 1.0, 1.0, 1.0) - Tex2D2.aaaa;
+float4 Multiply5=Multiply4 * Invert1;
 float4 Tex2D1=tex2D(_Alpha,(IN.uv_Alpha.xyxy).xy);
 float4 Master0_0_NoInput = float4(0,0,0,0);
 float4 Master0_1_NoInput = float4(0,0,1,1);
 float4 Master0_7_NoInput = float4(0,0,0,0);
 float4 Master0_6_NoInput = float4(1,1,1,1);
-o.Emission = Lerp0;
+o.Emission = Multiply2;
 o.Specular = _Glossiness.xxxx;
-o.Gloss = _Specularity.xxxx;
+o.Gloss = Multiply5;
 o.Alpha = Tex2D1;
 
 				o.Normal = normalize(o.Normal);

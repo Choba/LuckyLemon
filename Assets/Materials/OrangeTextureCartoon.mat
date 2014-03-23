@@ -24,14 +24,14 @@ Material:
         first:
           name: _BaseTexture
         second:
-          m_Texture: {fileID: 2800000, guid: fa6ceeb5865f2e94cb23f129dd600254, type: 3}
+          m_Texture: {fileID: 2800000, guid: 55735680522a56b438946edfe5e0ba99, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _FaceTexture
         second:
-          m_Texture: {fileID: 2800000, guid: 2113287a28efcdb4c8d040319a674734, type: 3}
+          m_Texture: {fileID: 2800000, guid: 53e99375722294a45b75110e9c7e6f77, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -56,31 +56,63 @@ Material:
       data:
         first:
           name: _Brightness
-        second: .470149249
+        second: 1
       data:
         first:
           name: _EmissiveMult
-        second: 1
+        second: .200000003
       data:
         first:
           name: _RimPower
-        second: .465671659
+        second: .862100244
       data:
         first:
           name: _RimMult
-        second: 1
+        second: 1.39999998
       data:
         first:
           name: _Specularity
-        second: .567164183
+        second: .960021257
       data:
         first:
           name: _Glossiness
-        second: .089552246
+        second: .518123686
       data:
         first:
           name: _GlowmapStrength
         second: .5
+      data:
+        first:
+          name: _contrast
+        second: 0
+      data:
+        first:
+          name: _shadingBringhtness
+        second: .392857134
+      data:
+        first:
+          name: _rate
+        second: 1
+      data:
+        first:
+          name: _outlineThickness
+        second: .607142866
+      data:
+        first:
+          name: _min
+        second: .892857134
+      data:
+        first:
+          name: _pow
+        second: 1.21428573
+      data:
+        first:
+          name: _brightnessB
+        second: .785714269
+      data:
+        first:
+          name: _threshold
+        second: 7.6785717
     m_Colors:
       data:
         first:
@@ -93,11 +125,11 @@ Material:
       data:
         first:
           name: _EmissiveColor
-        second: {r: .301470578, g: .18088235, b: 0, a: 1}
+        second: {r: .286764681, g: .172058821, b: 0, a: 1}
       data:
         first:
           name: _RimColor
-        second: {r: 1, g: .835699797, b: .404411793, a: 1}
+        second: {r: .213235319, g: .170415238, b: .0580125526, a: 1}
       data:
         first:
           name: _AmbientColor

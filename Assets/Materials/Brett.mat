@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Brett
+  m_Shader: {fileID: 4800000, guid: 80db790515c35634ead2560fa6da88db, type: 3}
+  m_ShaderKeywords: []
+  m_CustomRenderQueue: -1
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+      data:
+        first:
+          name: _MainTex
+        second:
+          m_Texture: {fileID: 2800000, guid: fa6ceeb5865f2e94cb23f129dd600254, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _BaseTexture
+        second:
+          m_Texture: {fileID: 2800000, guid: 4aabe6a9e274b0b459204aa30e972306, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _FaceTexture
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Alpha
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Glowmap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+    m_Floats:
+      data:
+        first:
+          name: _BaseTextureStrength
+        second: 0
+      data:
+        first:
+          name: _Brightness
+        second: 1.42857134
+      data:
+        first:
+          name: _EmissiveMult
+        second: .200000003
+      data:
+        first:
+          name: _RimPower
+        second: .862100244
+      data:
+        first:
+          name: _RimMult
+        second: 1
+      data:
+        first:
+          name: _Specularity
+        second: .745735586
+      data:
+        first:
+          name: _Glossiness
+        second: .410980821
+      data:
+        first:
+          name: _GlowmapStrength
+        second: .5
+      data:
+        first:
+          name: _contrast
+        second: 0
+      data:
+        first:
+          name: _shadingBringhtness
+        second: .392857134
+      data:
+        first:
+          name: _rate
+        second: 1
+      data:
+        first:
+          name: _outlineThickness
+        second: 1
+      data:
+        first:
+          name: _min
+        second: .892857134
+      data:
+        first:
+          name: _pow
+        second: 1.21428573
+      data:
+        first:
+          name: _brightnessB
+        second: 1
+      data:
+        first:
+          name: _threshold
+        second: 0
+    m_Colors:
+      data:
+        first:
+          name: _Color
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _BaseColor
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _EmissiveColor
+        second: {r: .286764681, g: .172058821, b: 0, a: 1}
+      data:
+        first:
+          name: _RimColor
+        second: {r: .213235319, g: .170415238, b: .0580125526, a: 1}
+      data:
+        first:
+          name: _AmbientColor
+        second: {r: 1, g: 1, b: 1, a: 1}
