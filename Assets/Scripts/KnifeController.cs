@@ -163,4 +163,12 @@ public class KnifeController : MonoBehaviour {
 			collidingFruits.Remove(other.gameObject);
 		}
 	}
+
+	public void SetEnabled(bool b) {
+		enabled = b;
+
+		if (!b) {
+			Reset ();
+		}
+	}
 }

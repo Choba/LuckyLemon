@@ -39,7 +39,7 @@ public class PowerUpSpawner : MonoBehaviour {
 
     void spawnPowerUp()
     {
-        Vector3 pos = new Vector3(Random.Range(boundsX1, boundsX2), 1.5f, Random.Range(boundsY1, boundsY2));
+        Vector3 pos = new Vector3(Random.Range(boundsX1, boundsX2), .5f, Random.Range(boundsY1, boundsY2));
         Instantiate(powerUpPrefab, pos, Quaternion.identity);
     }
 

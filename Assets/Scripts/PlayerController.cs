@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour {
 	public float stompRadius = .5f;
     public float stompPower = 1;
 
+	public bool lockRotationToVelocity;
+
     void Start() {
         updateHUD();
     }
@@ -44,8 +46,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
     void LateUpdate() {
-        if (rigidbody.velocity.magnitude > 1) {
-            //transform.rotation = Quaternion.LookRotation(rigidbody.velocity, Vector3.up);
+		if (lockRotationToVelocity && rigidbody.velocity.magnitude > 1) {
+            transform.rotation = Quaternion.LookRotation(rigidbody.velocity, Vector3.up);
         }
     }
 	
@@ -94,7 +96,7 @@ public class PlayerController : MonoBehaviour {
     void OnDestroy() {
         renderer.enabled = false;
         print("player " + playerNum + " destroyed");
-        GameManager.EndGame((int)playerNum % 2 + 1);
+        GameManager.Instance.EndGame((int)playerNum % 2 + 1);
     }
 
 	public void updateHUD() {
