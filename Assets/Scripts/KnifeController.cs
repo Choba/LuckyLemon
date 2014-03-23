@@ -76,7 +76,7 @@ public class KnifeController : MonoBehaviour {
                 }
                 break;
             case State.Chopping:
-                knifeCutCollider.collider.enabled = true;
+                //knifeCutCollider.collider.enabled = true;
                 Chop();
 
                 if (transform.position.y <= .07f) {
@@ -86,7 +86,7 @@ public class KnifeController : MonoBehaviour {
                 }
                 break;
             case State.OnBoard:
-                knifeCutCollider.collider.enabled = false;
+                //knifeCutCollider.collider.enabled = false;
                 acceleration = Vector3.zero;
                 Vector3 pos = transform.position;
                 pos.y = .07f;

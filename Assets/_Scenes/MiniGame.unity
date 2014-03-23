@@ -229,9 +229,9 @@ BoxCollider:
   m_GameObject: {fileID: 6063957}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: .100000001, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &6063964
 MeshFilter:
@@ -2109,6 +2109,14 @@ Prefab:
     - target: {fileID: 400000, guid: 250aadd627a66244f9fb18e3b6b50fa9, type: 2}
       propertyPath: m_LocalScale.x
       value: .839999974
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: 250aadd627a66244f9fb18e3b6b50fa9, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: 250aadd627a66244f9fb18e3b6b50fa9, type: 2}
+      propertyPath: m_Size.x
+      value: .100000001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 250aadd627a66244f9fb18e3b6b50fa9, type: 2}

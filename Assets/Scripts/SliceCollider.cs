@@ -11,6 +11,7 @@ public class SliceCollider : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
+			print ("cut player " + other.gameObject);
             audio.clip = killSounds[Random.Range(0, killSounds.Count)];
             audio.Play();
             if (other.gameObject.transform.parent.gameObject.GetComponent<PlayerController>().coins <= hitPenalty)
