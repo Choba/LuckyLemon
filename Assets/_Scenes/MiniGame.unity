@@ -2604,12 +2604,14 @@ MonoBehaviour:
   coinGuiAnimator: {fileID: 2083757052}
   stompCost: 3
   stompAnimation: {fileID: 100000, guid: 03e3ec293aad9ae499f0505707e0be55, type: 2}
+  noControls: 0
+  meshTransform: {fileID: 791377256}
   pointsText: {fileID: 0}
   playerNum: 1
   opponent: {fileID: 2129689963}
   coins: 3
   stompRadius: 2
-  stompPower: 5000
+  stompPower: 700
   lockRotationToVelocity: 0
 --- !u!23 &1138514224
 Renderer:
@@ -6211,12 +6213,14 @@ MonoBehaviour:
   coinGuiAnimator: {fileID: 471306344}
   stompCost: 3
   stompAnimation: {fileID: 100000, guid: 03e3ec293aad9ae499f0505707e0be55, type: 2}
+  noControls: 0
+  meshTransform: {fileID: 1720442626}
   pointsText: {fileID: 0}
   playerNum: 2
   opponent: {fileID: 1138514221}
   coins: 3
   stompRadius: 2
-  stompPower: 5000
+  stompPower: 700
   lockRotationToVelocity: 0
 --- !u!23 &2129689967
 Renderer:

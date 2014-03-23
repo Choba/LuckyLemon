@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour {
     public Animator coinGuiAnimator;
     public int stompCost = 3;
     public GameObject stompAnimation;
+    public bool noControls;
+    float noControlsTimer;
+    public Transform meshTransform;
 
     public GUIText pointsText;
     public enum Players { player1 = 1, player2 = 2 };
@@ -29,9 +32,16 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetButtonDown("Stomp" + (int)playerNum)) {
 			Stomp();
         }
+        if (noControls)
+        {
+            noControlsTimer -= Time.deltaTime;
+            if (noControlsTimer < 0)
+                noControls = false;
+        }
 	}
     
     void FixedUpdate() {
+        if (noControls) return;
 		float moveHorizontal = 0;
         float moveVertical = 0;
 
@@ -59,11 +69,11 @@ public class PlayerController : MonoBehaviour {
         }
 
         loseCoins(stompCost);
-        Vector3 pos = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
+        Vector3 pos = new Vector3(meshTransform.position.x, meshTransform.position.y + 0.5f, meshTransform.position.z);
         GameObject stomp = (GameObject) Instantiate(stompAnimation);
-        stomp.transform.position = transform.position;
+        stomp.transform.position = pos;
 
-        Collider[] objectsInRange = Physics.OverlapSphere(transform.position, stompRadius);
+        Collider[] objectsInRange = Physics.OverlapSphere(meshTransform.position, stompRadius);
 
         foreach (Collider col in objectsInRange) {
             try {
@@ -86,7 +96,9 @@ public class PlayerController : MonoBehaviour {
 
                     //Debug.Log("stomp hit " + enemy + " at dist " + (col.transform.position - transform.position).magnitude);
 
-					enemy.GetComponentInChildren<Rigidbody>().AddExplosionForce(stompPower, transform.position, stompRadius, .2f);
+                    enemy.GetComponentInChildren<Rigidbody>().AddExplosionForce(stompPower, meshTransform.position, stompRadius, .2f);
+                    enemy.GetComponent<PlayerController>().noControls = true;
+                    enemy.GetComponent<PlayerController>().noControlsTimer = 0.5f;
                 }
             } catch (NullReferenceException e) {
                 
