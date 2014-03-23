@@ -15,7 +15,7 @@ public class SliceCollider : MonoBehaviour {
             audio.Play();
             if (other.gameObject.transform.parent.gameObject.GetComponent<PlayerController>().coins <= hitPenalty)
             {
-                Destroy(other.gameObject);
+                Destroy(other.gameObject.transform.parent.gameObject);
                 other.gameObject.transform.parent.gameObject.GetComponent<PlayerController>().coins = 0;
             }
             else

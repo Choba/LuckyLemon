@@ -12,6 +12,6 @@ public class PlayerCoinGUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        GetComponent<TextMesh>().text = "x " + player.coins;
+        GetComponent<TextMesh>().text = "" + player.coins;
 	}
 }

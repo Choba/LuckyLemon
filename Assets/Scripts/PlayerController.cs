@@ -5,6 +5,10 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 	public float moveSpeed;
     public float speedIncreasePerCoin = 0.01f;
+    public Animator meshAnimator;
+    public Animator coinGuiAnimator;
+    public int stompCost = 3;
+    public GameObject stompAnimation;
 
     public GUIText pointsText;
     public enum Players { player1 = 1, player2 = 2 };
@@ -33,17 +37,29 @@ public class PlayerController : MonoBehaviour {
         moveVertical = Input.acceleration.y * 2 + Input.GetAxis("Vertical" + (int)playerNum);
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-        rigidbody.AddForce(movement * moveSpeed * Time.deltaTime);
+        //rigidbody.AddForce(movement * moveSpeed * Time.deltaTime);
+        rigidbody.velocity = movement * moveSpeed *Time.deltaTime;
+
+        //meshAnimator.SetFloat("Velocity", Vector3.Magnitude(rigidbody.velocity));
 	}
 
     void LateUpdate() {
         if (rigidbody.velocity.magnitude > 1) {
-            transform.rotation = Quaternion.LookRotation(rigidbody.velocity, Vector3.up);
+            //transform.rotation = Quaternion.LookRotation(rigidbody.velocity, Vector3.up);
         }
     }
 	
 	void Stomp() {
-        Debug.Log("stomp");
+        if (coins < stompCost)
+        {
+            return;
+        }
+
+        loseCoins(stompCost);
+        Vector3 pos = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
+        GameObject stomp = (GameObject) Instantiate(stompAnimation);
+        stomp.transform.position = transform.position;
+
         Collider[] objectsInRange = Physics.OverlapSphere(transform.position, stompRadius);
 
         foreach (Collider col in objectsInRange) {
@@ -65,11 +81,12 @@ public class PlayerController : MonoBehaviour {
                         enemy.ApplyDamage(damage * effect);
                     }*/
 
-                    Debug.Log("stomp hit " + enemy + " at dist " + (col.transform.position - transform.position).magnitude);
+                    //Debug.Log("stomp hit " + enemy + " at dist " + (col.transform.position - transform.position).magnitude);
+
                     enemy.rigidbody.AddExplosionForce(stompPower, transform.position, stompRadius, .2f);
                 }
             } catch (NullReferenceException e) {
-                /* empty */
+                
             }
         }
     }
@@ -85,7 +102,16 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void getCoins(int amount) {
-		coins += amount;
+        if (coins + amount > 99)
+        {
+            amount -= (coins + amount - 99);
+            coins = 99;
+        }
+        else
+        {
+            coins += amount;
+        }
+        coinGuiAnimator.SetTrigger("Animate");
         moveSpeed *= 1.0f + (speedIncreasePerCoin * amount);
     }
 
