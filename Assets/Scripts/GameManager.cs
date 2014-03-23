@@ -9,13 +9,29 @@ public class GameManager : MonoBehaviour {
 
 	private bool gameIsRunning;
 
-	void Awake () {
-		DontDestroyOnLoad (_instance);
+	void Awake() {
+		if (_instance != null && _instance != this) {
+			Destroy(this.gameObject);
+			return;
+		} else {
+			_instance = this;
+		}
+		DontDestroyOnLoad(this.gameObject);
 	}
 
 	// Use this for initialization
     void Start() {
 		StartGame ();
+	}
+
+	private void Instantiate() {
+		if (_instance != null && _instance != this)	{
+			Destroy(this.gameObject);
+			return;
+		} else {
+			_instance = this;
+		}
+		DontDestroyOnLoad(this.gameObject);
 	}
 	
 	// Update is called once per frame
@@ -52,22 +68,8 @@ public class GameManager : MonoBehaviour {
 		StartGame ();
     }
 
-	public static GameManager Instance
-	{
-		get
-		{
-			if (!_instance)
-			{
-				_instance = GameObject.FindObjectOfType(typeof(GameManager)) as GameManager;
-				if (!_instance)
-				{
-					_instance = GameObject.FindObjectOfType(typeof(GameManager)) as GameManager;
-					if (!_instance) {
-						Debug.LogError("There needs to be one active GameManager script on a GameObject in your scene.");
-					}
-				}
-			}
-			
+	public static GameManager Instance {
+		get {
 			return _instance;
 		}
 	}
