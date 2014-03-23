@@ -31,7 +31,7 @@ AnimationClip:
         value: {x: -8.80889034, y: -2.93629646, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
-        tangentMode: 1132462080
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: startscreenbling
