@@ -7,22 +7,21 @@ public class GameManager : MonoBehaviour {
     private int winningPlayerId = -1;
     private float restartTimer;
 
+	private bool gameIsRunning;
+
 	void Awake() {
 		if (GameManager.Instance != null && GameManager.Instance != this) {
 			Destroy(this.gameObject);
 			return;
 		} else {
 			_instance = this;
+			PlayerPrefs.DeleteAll ();
 		}
 		DontDestroyOnLoad(this.gameObject);
-	}
-	
-	void OnDestroy() {
-		print ("destroy old GameManager");
+		DontDestroyOnLoad(this.gameObject.transform.parent);
 	}
 
-	// Use this for initialization
-    void Start() {
+	void Start() {
 		StartGame ();
 	}
 
@@ -50,17 +49,25 @@ public class GameManager : MonoBehaviour {
 	public void StartGame() {
 		print ("start game");
 		restartTimer = -1;
+		gameIsRunning = true;
+	}
+
+	void OnLevelWasLoaded(int level) {
+		StartGame ();
 	}
 
     public void EndGame(int winningPlayer)
-    {
-        winningPlayerId = winningPlayer;
-        restartTimer = 0;
-		KnifeController knife = GameObject.FindObjectOfType (typeof(KnifeController)) as KnifeController;
-		knife.SetEnabled (false);
-		print("Player " + winningPlayerId + " survived!\nPlayer " + (winningPlayerId % 2 + 1) + ", you're lemonade :(");
+    {		
+		if (gameIsRunning) {
+			winningPlayerId = winningPlayer;
+			GrantPoints ();
 
-		GrantPoints ();
+			restartTimer = 0;
+			KnifeController knife = GameObject.FindObjectOfType (typeof(KnifeController)) as KnifeController;
+			knife.SetEnabled (false);
+			print ("Player " + winningPlayerId + " survived!\nPlayer " + (winningPlayerId % 2 + 1) + ", you're lemonade :(");
+			gameIsRunning = false;
+		}
 	}
 
 	private void GrantPoints() {
@@ -68,11 +75,13 @@ public class GameManager : MonoBehaviour {
 		PlayerPrefs.SetInt (key, PlayerPrefs.GetInt (key) + 1);
 	}
 
-    private void RestartLevel() {
-        print("restart");
-        Application.LoadLevel(Application.loadedLevel);
-		StartGame ();
+	private void RestartLevel() {
+		Application.LoadLevel(Application.loadedLevel);
     }
+
+	public bool GameIsStarted() {
+		return gameIsRunning;
+	}
 
 	public static GameManager Instance {
 		get {
