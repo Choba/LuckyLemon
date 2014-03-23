@@ -7,9 +7,6 @@ public class GameManager : MonoBehaviour {
     private int winningPlayerId = -1;
     private float restartTimer;
 
-	private int player1Score = 2;
-	private int player2Score = 2;
-
 	void Awake() {
 		if (GameManager.Instance != null && GameManager.Instance != this) {
 			Destroy(this.gameObject);
@@ -67,19 +64,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	private void GrantPoints() {
-		if (winningPlayerId == 1) {
-			player1Score++;
-		} else {
-			player2Score++;
-		}
-	}
-
-	public int getPlayerScore(int playerId) {
-		if (playerId == 1) {
-			return player1Score;
-		} else {
-			return player2Score;
-		}
+		string key = "Player" + winningPlayerId + "Score";
+		PlayerPrefs.SetInt (key, PlayerPrefs.GetInt (key) + 1);
 	}
 
     private void RestartLevel() {
