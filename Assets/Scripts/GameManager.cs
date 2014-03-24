@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void StartGame() {
-		print ("start game");
 		restartTimer = -1;
 		gameIsRunning = true;
 	}
@@ -64,7 +63,6 @@ public class GameManager : MonoBehaviour {
 			restartTimer = 0;
 			KnifeController knife = GameObject.FindObjectOfType (typeof(KnifeController)) as KnifeController;
 			knife.End();
-			print ("Player " + winningPlayerId + " survived!\nPlayer " + (winningPlayerId % 2 + 1) + ", you're lemonade :(");
 			gameIsRunning = false;
 		}
 	}

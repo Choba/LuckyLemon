@@ -4,6 +4,8 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 	public float moveSpeed;
+    public GameObject corpse;
+    public Texture[] faceTex;
     public float speedIncreasePerCoin = 0.01f;
     public Animator meshAnimator;
     public Animator coinGuiAnimator;
@@ -68,7 +70,7 @@ public class PlayerController : MonoBehaviour {
         {
             return;
         }
-
+        GetComponent<Animator>().SetTrigger("Stomp");
         loseCoins(stompCost);
         Vector3 pos = new Vector3(meshTransform.position.x, meshTransform.position.y + 0.5f, meshTransform.position.z);
         GameObject stomp = (GameObject) Instantiate(stompAnimation);
@@ -108,37 +110,37 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void Kill() {
-		noControls = true;
+        GameObject dead = (GameObject)Instantiate(corpse, meshTransform.position, meshTransform.rotation);
+        
+		foreach (Transform child in transform) {	
+			if (child.CompareTag("Player")) {
+				child.gameObject.renderer.enabled = false;
+			}
+		}
 
-        print("player " + playerNum + " destroyed");
-        if (playerNum == Players.player1) {
+        if (playerNum == Players.player1)
+        {
             endscreenAnimator.SetTrigger("OrangeWins");
-        } else {
+        }
+        else
+        {
             endscreenAnimator.SetTrigger("LemonWins");
         }
         GameManager.Instance.EndGame((int)playerNum % 2 + 1);
-
-		foreach (Transform child in transform) {
-			if (child.CompareTag("Player")) {
-				child.renderer.enabled = false;
-			}
-			if (child.CompareTag("PlayerCorpse")) {
-				child.gameObject.SetActive(true);
-				child.transform.position = GetComponentInChildren<Rigidbody>().gameObject.transform.position;
-				child.GetComponentInChildren<PlayerCorpse>().Activate();
-			}
-		}
-	}
+    }
 
 	public void updateHUD() {
 
     }
 
     public void getCoins(int amount) {
-        if (coins + amount > 99) {
+        if (coins + amount > 99)
+        {
             amount -= (coins + amount - 99);
             coins = 99;
-        } else {
+        }
+        else
+        {
             coins += amount;
         }
         coinGuiAnimator.SetTrigger("Animate");

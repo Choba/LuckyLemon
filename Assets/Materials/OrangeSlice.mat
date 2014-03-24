@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: OrangeSlice
-  m_Shader: {fileID: 4800000, guid: 80db790515c35634ead2560fa6da88db, type: 3}
+  m_Shader: {fileID: 4800000, guid: 597d0ff84d4506245bf7a4b8199223bc, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -24,19 +24,19 @@ Material:
         first:
           name: _BaseTexture
         second:
-          m_Texture: {fileID: 2800000, guid: 69d84fc5e0f909345bd3a868b9498367, type: 3}
+          m_Texture: {fileID: 2800000, guid: cfe636b2f7a3e4d4f89cdb2a29ff8f58, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _FaceTexture
+          name: _Alpha
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _Alpha
+          name: _FaceTexture
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -49,10 +49,6 @@ Material:
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
-      data:
-        first:
-          name: _BaseTextureStrength
-        second: 0
       data:
         first:
           name: _Brightness
@@ -77,6 +73,10 @@ Material:
         first:
           name: _Glossiness
         second: .410980821
+      data:
+        first:
+          name: _BaseTextureStrength
+        second: 0
       data:
         first:
           name: _GlowmapStrength
