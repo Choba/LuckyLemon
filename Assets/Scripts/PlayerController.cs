@@ -108,37 +108,37 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void Kill() {
-        renderer.enabled = false;
+		noControls = true;
+
         print("player " + playerNum + " destroyed");
-        if (playerNum == Players.player1)
-        {
+        if (playerNum == Players.player1) {
             endscreenAnimator.SetTrigger("OrangeWins");
-        }
-        else
-        {
+        } else {
             endscreenAnimator.SetTrigger("LemonWins");
         }
         GameManager.Instance.EndGame((int)playerNum % 2 + 1);
 
-		foreach (Transform child in transform) {	
+		foreach (Transform child in transform) {
+			if (child.CompareTag("Player")) {
+				child.renderer.enabled = false;
+			}
 			if (child.CompareTag("PlayerCorpse")) {
 				child.gameObject.SetActive(true);
+				child.transform.position = GetComponentInChildren<Rigidbody>().gameObject.transform.position;
+				child.GetComponentInChildren<PlayerCorpse>().Activate();
 			}
 		}
-    }
+	}
 
 	public void updateHUD() {
 
     }
 
     public void getCoins(int amount) {
-        if (coins + amount > 99)
-        {
+        if (coins + amount > 99) {
             amount -= (coins + amount - 99);
             coins = 99;
-        }
-        else
-        {
+        } else {
             coins += amount;
         }
         coinGuiAnimator.SetTrigger("Animate");
