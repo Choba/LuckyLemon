@@ -489,15 +489,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400002, guid: 1880a732ad112a541100162a44295342, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -.181230456
+      value: -1.06184304
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 1880a732ad112a541100162a44295342, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -.45525673
+      value: -.455256641
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 1880a732ad112a541100162a44295342, type: 2}
       propertyPath: m_LocalPosition.z
-      value: .533691227
+      value: .533691168
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 1880a732ad112a541100162a44295342, type: 2}
       propertyPath: m_LocalRotation.x
@@ -529,7 +529,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11900000, guid: 1880a732ad112a541100162a44295342, type: 2}
       propertyPath: m_FieldOfView
-      value: 90
+      value: 130
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1880a732ad112a541100162a44295342, type: 2}
@@ -934,9 +934,9 @@ Transform:
   m_LocalPosition: {x: -4.5, y: 12, z: -1.52999997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 953019604}
   - {fileID: 454534543}
   - {fileID: 6063958}
+  - {fileID: 953019604}
   m_Father: {fileID: 0}
 --- !u!1001 &447308521
 Prefab:
@@ -1798,7 +1798,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 0dfad752fcd944346872aadb459b2773, type: 2}
       propertyPath: m_Name
-      value: KnfieShadow
+      value: KnifeShadow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0dfad752fcd944346872aadb459b2773, type: 2}
@@ -2538,7 +2538,7 @@ GameObject:
   - 4: {fileID: 953019604}
   - 119: {fileID: 953019605}
   m_Layer: 8
-  m_Name: KnfieShadow
+  m_Name: KnifeShadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5911,7 +5911,7 @@ Transform:
   m_PrefabInternal: {fileID: 2034515713}
   m_GameObject: {fileID: 1621717244}
   m_LocalRotation: {x: .50000006, y: -.50000006, z: -.49999994, w: .49999994}
-  m_LocalPosition: {x: -.262099564, y: -3.48449254, z: 1.24962187}
+  m_LocalPosition: {x: -1.53567386, y: -3.48449254, z: 1.24962187}
   m_LocalScale: {x: 2.20919776, y: 2.209198, z: 2.20919752}
   m_Children: []
   m_Father: {fileID: 791377256}
@@ -5926,7 +5926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0cb202508a8d7a4492cb931e5892f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: .5, y: 0, z: .5}
+  offset: {x: .100000001, y: -1, z: .5}
 --- !u!119 &1621717247
 Projector:
   m_ObjectHideFlags: 0
@@ -5938,7 +5938,7 @@ Projector:
   serializedVersion: 2
   m_NearClipPlane: .100000001
   m_FarClipPlane: 50
-  m_FieldOfView: 90
+  m_FieldOfView: 130
   m_AspectRatio: 1
   m_Orthographic: 0
   m_OrthographicSize: 2
@@ -6559,7 +6559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0cb202508a8d7a4492cb931e5892f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: .5, y: 0, z: .5}
+  offset: {x: .100000001, y: -1, z: .5}
 --- !u!119 &1985010836
 Projector:
   m_ObjectHideFlags: 0
@@ -6571,7 +6571,7 @@ Projector:
   serializedVersion: 2
   m_NearClipPlane: .100000001
   m_FarClipPlane: 50
-  m_FieldOfView: 90
+  m_FieldOfView: 130
   m_AspectRatio: 1
   m_Orthographic: 0
   m_OrthographicSize: 2
@@ -6586,7 +6586,7 @@ Transform:
   m_PrefabInternal: {fileID: 213405046}
   m_GameObject: {fileID: 1985010834}
   m_LocalRotation: {x: .5, y: -.5, z: -.5, w: .5}
-  m_LocalPosition: {x: -.181230456, y: -.45525673, z: .533691227}
+  m_LocalPosition: {x: -1.06184304, y: -.455256641, z: .533691168}
   m_LocalScale: {x: 1.52754927, y: 1.52754962, z: 1.52754951}
   m_Children: []
   m_Father: {fileID: 1720442626}
@@ -6756,7 +6756,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400002, guid: 1880a732ad112a541100162a44295342, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -.262099564
+      value: -1.53567386
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 1880a732ad112a541100162a44295342, type: 2}
       propertyPath: m_LocalPosition.y
@@ -6796,7 +6796,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11900000, guid: 1880a732ad112a541100162a44295342, type: 2}
       propertyPath: m_FieldOfView
-      value: 90
+      value: 130
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1880a732ad112a541100162a44295342, type: 2}
