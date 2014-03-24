@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Brett
+  m_Name: LemonTextureCartoonDead
   m_Shader: {fileID: 4800000, guid: 597d0ff84d4506245bf7a4b8199223bc, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
@@ -17,14 +17,14 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: fa6ceeb5865f2e94cb23f129dd600254, type: 3}
+          m_Texture: {fileID: 2800000, guid: 26edb9048d8784f05bfe996527fd0f15, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _BaseTexture
         second:
-          m_Texture: {fileID: 2800000, guid: 4aabe6a9e274b0b459204aa30e972306, type: 3}
+          m_Texture: {fileID: 2800000, guid: 9ae7ac8a99113ec458290f9fb7288436, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -38,7 +38,7 @@ Material:
         first:
           name: _FaceTexture
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: ec7b55d88f8bb71489da102ec926ef36, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -52,27 +52,27 @@ Material:
       data:
         first:
           name: _Brightness
-        second: 1.42857134
-      data:
-        first:
-          name: _EmissiveMult
-        second: .200000003
-      data:
-        first:
-          name: _RimPower
-        second: .862100244
-      data:
-        first:
-          name: _RimMult
         second: 1
       data:
         first:
+          name: _EmissiveMult
+        second: .25999999
+      data:
+        first:
+          name: _RimPower
+        second: .67473352
+      data:
+        first:
+          name: _RimMult
+        second: 1.29999995
+      data:
+        first:
           name: _Specularity
-        second: .745735586
+        second: 1.28678036
       data:
         first:
           name: _Glossiness
-        second: .410980821
+        second: .375266522
       data:
         first:
           name: _BaseTextureStrength
@@ -84,35 +84,35 @@ Material:
       data:
         first:
           name: _contrast
-        second: 0
+        second: .357142895
       data:
         first:
           name: _shadingBringhtness
-        second: .392857134
+        second: .642857134
       data:
         first:
           name: _rate
-        second: 1
+        second: 1.71428573
       data:
         first:
           name: _outlineThickness
-        second: 1
+        second: .607142866
       data:
         first:
           name: _min
-        second: .892857134
+        second: .928571463
       data:
         first:
           name: _pow
-        second: 1.21428573
+        second: 2.14285707
       data:
         first:
           name: _brightnessB
-        second: 1
+        second: .767857134
       data:
         first:
           name: _threshold
-        second: 0
+        second: 7.6785717
     m_Colors:
       data:
         first:
@@ -125,11 +125,11 @@ Material:
       data:
         first:
           name: _EmissiveColor
-        second: {r: .286764681, g: .172058821, b: 0, a: 1}
+        second: {r: .375, g: .14741379, b: 0, a: 1}
       data:
         first:
           name: _RimColor
-        second: {r: .213235319, g: .170415238, b: .0580125526, a: 1}
+        second: {r: 1, g: .984584153, b: .441176474, a: 1}
       data:
         first:
           name: _AmbientColor

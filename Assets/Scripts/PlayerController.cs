@@ -4,6 +4,8 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 	public float moveSpeed;
+    public GameObject corpse;
+    public Texture[] faceTex;
     public float speedIncreasePerCoin = 0.01f;
     public Animator meshAnimator;
     public Animator coinGuiAnimator;
@@ -68,7 +70,7 @@ public class PlayerController : MonoBehaviour {
         {
             return;
         }
-
+        GetComponent<Animator>().SetTrigger("Stomp");
         loseCoins(stompCost);
         Vector3 pos = new Vector3(meshTransform.position.x, meshTransform.position.y + 0.5f, meshTransform.position.z);
         GameObject stomp = (GameObject) Instantiate(stompAnimation);
@@ -108,8 +110,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void Kill() {
+        GameObject dead = (GameObject)Instantiate(corpse, meshTransform.position, meshTransform.rotation);
         renderer.enabled = false;
-        print("player " + playerNum + " destroyed");
         if (playerNum == Players.player1)
         {
             endscreenAnimator.SetTrigger("OrangeWins");
@@ -120,11 +122,11 @@ public class PlayerController : MonoBehaviour {
         }
         GameManager.Instance.EndGame((int)playerNum % 2 + 1);
 
-		foreach (Transform child in transform) {	
+		/*foreach (Transform child in transform) {	
 			if (child.CompareTag("PlayerCorpse")) {
 				child.gameObject.SetActive(true);
 			}
-		}
+		}*/
     }
 
 	public void updateHUD() {

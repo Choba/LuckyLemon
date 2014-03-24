@@ -11,7 +11,6 @@ public class SliceCollider : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
-			print ("cut player " + other.gameObject);
 
 			ParticleSystem particles = other.transform.parent.GetComponentInChildren<ParticleSystem>();
 			particles.transform.position = other.transform.position;

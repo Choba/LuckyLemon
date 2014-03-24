@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Brett
+  m_Name: OrangeTextureCartoonDead
   m_Shader: {fileID: 4800000, guid: 597d0ff84d4506245bf7a4b8199223bc, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
@@ -24,7 +24,7 @@ Material:
         first:
           name: _BaseTexture
         second:
-          m_Texture: {fileID: 2800000, guid: 4aabe6a9e274b0b459204aa30e972306, type: 3}
+          m_Texture: {fileID: 2800000, guid: 55735680522a56b438946edfe5e0ba99, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -38,7 +38,7 @@ Material:
         first:
           name: _FaceTexture
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: e76ae7b3f1e157b4eb2ce7d530e03999, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -52,7 +52,7 @@ Material:
       data:
         first:
           name: _Brightness
-        second: 1.42857134
+        second: 1
       data:
         first:
           name: _EmissiveMult
@@ -64,15 +64,15 @@ Material:
       data:
         first:
           name: _RimMult
-        second: 1
+        second: 1.39999998
       data:
         first:
           name: _Specularity
-        second: .745735586
+        second: .960021257
       data:
         first:
           name: _Glossiness
-        second: .410980821
+        second: .518123686
       data:
         first:
           name: _BaseTextureStrength
@@ -96,7 +96,7 @@ Material:
       data:
         first:
           name: _outlineThickness
-        second: 1
+        second: .607142866
       data:
         first:
           name: _min
@@ -108,11 +108,11 @@ Material:
       data:
         first:
           name: _brightnessB
-        second: 1
+        second: .785714269
       data:
         first:
           name: _threshold
-        second: 0
+        second: 7.6785717
     m_Colors:
       data:
         first:
