@@ -6,6 +6,8 @@ public class KnifeController : MonoBehaviour {
 	public float maxTimerLimit = 1;
     float timeScaling = 1;
     float cutPatternTimeScaling = 10;
+    public AudioSource kidVoice;
+    public AudioClip[] voices;
 	private float timerLimit;
 	private float deltaTime;
 	private List<GameObject> collidingFruits = new List<GameObject>();
@@ -45,6 +47,7 @@ public class KnifeController : MonoBehaviour {
         Reset();
         Lift();
 		timerLimit = maxTimerLimit;
+        DontDestroyOnLoad(kidVoice);
 	}
 	
 	// Update is called once per frame
@@ -147,6 +150,13 @@ public class KnifeController : MonoBehaviour {
         }
         else
         {
+            float random = Random.value;
+            if (random < 0.66f)
+            {
+                int idx = Random.Range(0, voices.Length);
+                kidVoice.clip = voices[idx];
+                kidVoice.Play();
+            }
             seriesIndex = Random.Range(0, series.Count);
             positionIndex = 0;
         }
@@ -155,6 +165,8 @@ public class KnifeController : MonoBehaviour {
 
         transform.position = knifePositions[i];
         transform.eulerAngles = knifeRotations[i];
+
+        
 	}
 
 	private void Reset() {

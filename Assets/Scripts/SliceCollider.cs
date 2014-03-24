@@ -21,7 +21,7 @@ public class SliceCollider : MonoBehaviour {
             if (other.gameObject.transform.parent.gameObject.GetComponent<PlayerController>().coins <= hitPenalty)
             {
 				other.gameObject.transform.parent.gameObject.GetComponent<PlayerController>().Kill();
-				//Destroy(other.gameObject);
+				Destroy(other.gameObject);
             }
             else
             {

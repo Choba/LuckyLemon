@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour {
     public GameObject stompAnimation;
     public bool noControls;
     float noControlsTimer;
+    public AudioSource voice;
+    public AudioClip[] voices;
     public Transform meshTransform;
     public Animator endscreenAnimator;
 
@@ -111,13 +113,7 @@ public class PlayerController : MonoBehaviour {
 
     public void Kill() {
         GameObject dead = (GameObject)Instantiate(corpse, meshTransform.position, meshTransform.rotation);
-        
-		foreach (Transform child in transform) {	
-			if (child.CompareTag("Player")) {
-				child.gameObject.renderer.enabled = false;
-			}
-		}
-
+        renderer.enabled = false;
         if (playerNum == Players.player1)
         {
             endscreenAnimator.SetTrigger("OrangeWins");
@@ -127,6 +123,12 @@ public class PlayerController : MonoBehaviour {
             endscreenAnimator.SetTrigger("LemonWins");
         }
         GameManager.Instance.EndGame((int)playerNum % 2 + 1);
+
+		/*foreach (Transform child in transform) {	
+			if (child.CompareTag("PlayerCorpse")) {
+				child.gameObject.SetActive(true);
+			}
+		}*/
     }
 
 	public void updateHUD() {
