@@ -26,7 +26,7 @@ public class PowerUpSpawner : MonoBehaviour {
 		{
 			int rand = (int)Random.Range(2, 4);
 			int horver = (int)Random.Range(0, 2);
-			Vector3 pos = new Vector3(Random.Range(boundsX1, boundsX2), .5f, Random.Range(boundsY1, boundsY2));
+			Vector3 pos = new Vector3(Random.Range(boundsX1, boundsX2), 1.0f, Random.Range(boundsY1, boundsY2));
 			for (int i = 0; i < rand; i++)
 			{
 				Vector3 posI = new Vector3();
